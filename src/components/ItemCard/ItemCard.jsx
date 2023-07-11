@@ -12,6 +12,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import ItemImage from "./ItemImage";
 import ShopLink from "./ShopLink";
+import DiscountedPrice from "components/DiscountedPrice";
 
 const ItemCard = (props) => {
   const [showCartControls, setShowCartControls] = useState(true);
@@ -41,7 +42,12 @@ const ItemCard = (props) => {
 
   return (
     <Card
-      sx={{ minWidth: "20vw", maxWidth: "30vw", width: "25vw", height: "41vh" }}
+      sx={{
+        minWidth: "20vw",
+        maxWidth: "30vw",
+        width: "25vw",
+        height: "41vh",
+      }}
     >
       <ItemImage path={props.item.imagePath} alt={props.item.altText} />
       <Box display="flex" flexDirection="row" justifyContent="space-between">
@@ -50,15 +56,12 @@ const ItemCard = (props) => {
             {props.item.name}
           </Typography>
           <ShopLink name={props.item.shopName} id={props.item.shopId} />
-          {/* <Typography variant="body2" color="text.secondary">
-            {props.item.shopName}
-          </Typography> */}
         </CardContent>
-
         <CardContent sx={{ flexBasis: "0.5" }}>
-          <Typography paddingX="10px" color="text.secondary" textAlign="right">
-            €{props.item.price.toFixed(2)}
-          </Typography>
+          <DiscountedPrice
+            price={props.item.price.toFixed(2)}
+            discount={props.item.discount}
+          />
           <Collapse in={showCartControls} unmountOnExit>
             <CardActions>
               <Button size="small" onClick={increaseItemCount}>

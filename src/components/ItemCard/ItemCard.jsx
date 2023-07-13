@@ -46,7 +46,9 @@ const ItemCard = (props) => {
         minWidth: "20vw",
         maxWidth: "30vw",
         width: "25vw",
-        height: "41vh",
+        height: "90%",
+        minHeight: "fit-content",
+        marginBottom: "1rem",
       }}
     >
       <ItemImage path={props.item.imagePath} alt={props.item.altText} />

@@ -1,7 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import theme from "theme";
 const DiscountedPrice = (props) => {
-  console.log(props.price);
   if (props.discount > 0) {
     const discountedPrice = (
       props.price -

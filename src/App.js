@@ -8,6 +8,7 @@ import Footer from "scenes/footer";
 import { useSelector } from "react-redux";
 import ShopNavbar from "scenes/shopNavbar";
 import ShopHome from "scenes/shopHome";
+import ShopPage from "scenes/shopPage";
 
 function App() {
   const isShop = useSelector((state) => {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/profile/:userId" element={<ProfilePage />}></Route>
           <Route path="/checkout/:userId" element={<CheckoutPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/shops/:id" element={<ShopPage />}></Route>
         </Routes>
         <Footer></Footer>
       </BrowserRouter>

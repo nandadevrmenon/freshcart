@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import ShopNavbar from "scenes/shopNavbar";
 import ShopHome from "scenes/shopHome";
 import ShopPage from "scenes/shopPage";
+import UserCart from "scenes/userCart/UserCart";
 
 function App() {
   const isShop = useSelector((state) => {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/checkout/:userId" element={<CheckoutPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/shops/:id" element={<ShopPage />}></Route>
+          <Route path="/cart/:id" element={<UserCart />}></Route>
         </Routes>
         <Footer></Footer>
       </BrowserRouter>

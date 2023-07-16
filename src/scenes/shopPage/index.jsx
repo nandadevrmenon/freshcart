@@ -1,12 +1,22 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Paper, IconButton, InputBase, Divider } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import theme from "theme";
+import ItemTabs from "./ItemTabs";
+import ShopInfoBar from "./ShopInfoBar";
+import { useSelector } from "react-redux";
 
 const ShopPage = (props) => {
   const { id } = useParams();
   const [shop, setShop] = useState(null);
   const [itemsList, setItemsList] = useState([]);
+  const cart = useSelector((state) => {
+    return state.cart;
+  });
+  const cartShop = useSelector((state) => {
+    return state.cartShop;
+  });
 
   useEffect(() => {
     const fetchShallowShopDetails = async () => {
@@ -42,28 +52,63 @@ const ShopPage = (props) => {
     fetchShallowShopDetails();
     fetchAllItems();
   }, []);
-  const bannerPath = shop ? shop.bannerPath : "";
+
+  // if (error404) {
+  //   return (
+  //     <Box paddingY="7rem" width="100%" height="auto">
+  //       <Typography
+  //         variant="h5"
+  //         fontFamily="Poppins"
+  //         fontWeight="500"
+  //         color={theme.colors.siteDarkGreen}
+  //         textAlign="center"
+  //       >
+  //         This Shop Page Does Not Exist
+  //       </Typography>
+  //     </Box>
+  //   );
+  // }
+
   return (
-    <Box paddingTop="3.5rem" width="100%" height="auto">
-      <Box
-        marginX="auto"
-        width="80vw"
-        height="30vh"
-        borderLeft="1px solid grey"
-        borderRight="1px solid grey"
-        sx={{
-          backgroundImage: `url("http://localhost:3001/assets/${bannerPath}")`,
-          backgroundRepeat: "none",
-          backgroundSize: "cover",
-        }}
-      ></Box>
-      <Box
-        marginX="auto"
-        width="80vw"
-        borderLeft="1px solid grey"
-        borderRight="1px solid grey"
-        height={"100vh"}
-      ></Box>
+    <Box paddingTop="5rem" width="100%" height="auto">
+      <Box marginX="auto" width="80vw" height={"100vh"}>
+        <Box
+          display="flex"
+          flexDirection="row"
+          flexWrap="nowrap"
+          alignItems="centre"
+          justifyContent="space-between"
+          paddingY="1rem"
+        >
+          <ShopInfoBar shop={shop}></ShopInfoBar>
+          <Paper
+            component="form"
+            sx={{
+              p: "2px 4px",
+              display: "flex",
+              alignItems: "center",
+              width: 400,
+              height: 50,
+              marginY: "auto",
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1, color: theme.colors.darkGrey }}
+              placeholder="Search Shop"
+              inputProps={{ "aria-label": "Search Shop" }}
+            />
+            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+        </Box>
+        <ItemTabs
+          categories={shop ? shop.categories : []}
+          items={itemsList ? itemsList : []}
+          cart={cart}
+        ></ItemTabs>
+      </Box>
     </Box>
   );
 };

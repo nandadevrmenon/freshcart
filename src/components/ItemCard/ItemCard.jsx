@@ -64,6 +64,7 @@ const ItemCard = (props) => {
             price={props.item.price.toFixed(2)}
             discount={props.item.discount}
           />
+
           <Collapse in={showCartControls} unmountOnExit>
             <CardActions>
               <Button size="small" onClick={increaseItemCount}>

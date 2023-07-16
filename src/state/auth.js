@@ -19,13 +19,14 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.cart = { ...state.cart, ...action.payload.user.cart };
+      state.cartShop = action.payload.user.cartShop;
     },
     setLogout: (state) => {
       state.user = null;
       state.token = null;
-      state.cart = null;
+      state.cart = [];
       state.shop = null;
-      state.cartShop = [];
+      state.cartShop = null;
     },
     setShopLogin: (state, action) => {
       delete state.cart;

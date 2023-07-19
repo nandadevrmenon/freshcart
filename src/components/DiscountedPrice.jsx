@@ -7,9 +7,13 @@ const DiscountedPrice = (props) => {
       (props.price * props.discount) / 100
     ).toFixed(2);
     return (
-      <Box display="flex" justifyContent="space-between" paddingX="10px">
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        paddingX="10px"
+        marginBottom="7px"
+      >
         <Typography
-          // paddingLeft="15px"
           paddingRight="auto"
           textAlign="right"
           display="inline-block"
@@ -29,7 +33,12 @@ const DiscountedPrice = (props) => {
     );
   }
   return (
-    <Typography paddingX="10px" color="text.secondary" textAlign="right">
+    <Typography
+      paddingX="10px"
+      color="text.secondary"
+      textAlign="right"
+      marginBottom="7px"
+    >
       €{props.price}
     </Typography>
   );

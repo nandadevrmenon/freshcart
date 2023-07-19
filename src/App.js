@@ -15,7 +15,7 @@ function App() {
   const isShop = useSelector((state) => {
     return Boolean(state.shop) && Boolean(state.token);
   });
-  console.log("rerendered app");
+
   return (
     <div className="app">
       <BrowserRouter>

@@ -1,34 +1,9 @@
-import { useState } from "react";
-import { Box, Typography, Collapse, CardActions, Button } from "@mui/material";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import { Box, Typography } from "@mui/material";
 import DiscountedPrice from "components/DiscountedPrice";
 import theme from "theme";
+import ItemCountControl from "../../components/ItemCountControl";
+
 const ShopItem = (props) => {
-  const [showCartControls, setShowCartControls] = useState(props.count === 0);
-  const [ItemCount, setItemCount] = useState(props.count);
-
-  const toggleCartControls = () => {
-    setShowCartControls((prev) => !prev);
-  };
-
-  const increaseItemCount = (num) => {
-    setItemCount((prev) => {
-      if (prev === 0) {
-        toggleCartControls();
-      }
-      return prev + 1;
-    });
-  };
-
-  const decreaseItemCount = (num) => {
-    setItemCount((prev) => {
-      if (prev === 1) {
-        toggleCartControls();
-      }
-      return prev - 1;
-    });
-  };
   return (
     <Box
       display={props.show ? "flex" : "none"}
@@ -80,42 +55,7 @@ const ShopItem = (props) => {
             price={props.item.price.toFixed(2)}
             discount={props.item.discount}
           />
-          <Collapse in={showCartControls} unmountOnExit>
-            <CardActions sx={{ margin: 0, padding: 0 }}>
-              <Button
-                size="small"
-                variant="contained"
-                onClick={increaseItemCount}
-                sx={{
-                  backgroundColor: theme.colors.siteDarkGreen,
-                  ":hover": {
-                    backgroundColor: theme.colors.siteGreen,
-                  },
-                }}
-              >
-                add to cart
-              </Button>
-            </CardActions>
-          </Collapse>
-          <Collapse in={!showCartControls} unmountOnExit>
-            <CardActions sx={{ margin: 0, padding: 0 }}>
-              <Box display="flex" alignItems="center" minWidth="2rem">
-                <AddCircleIcon
-                  color="black"
-                  onClick={increaseItemCount}
-                  sx={{ marginRight: "1.6rem", fontSize: "25px" }}
-                />
-                <Typography fontSize="18px" display="inline">
-                  {ItemCount}
-                </Typography>
-                <RemoveCircleIcon
-                  color="black"
-                  onClick={decreaseItemCount}
-                  sx={{ marginLeft: "1.6rem", fontSize: "25px" }}
-                />
-              </Box>
-            </CardActions>
-          </Collapse>
+          <ItemCountControl productID={props.item._id}></ItemCountControl>
         </Box>
       </Box>
       <Box

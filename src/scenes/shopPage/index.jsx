@@ -11,12 +11,6 @@ const ShopPage = (props) => {
   const { id } = useParams();
   const [shop, setShop] = useState(null);
   const [itemsList, setItemsList] = useState([]);
-  const cart = useSelector((state) => {
-    return state.cart;
-  });
-  const cartShop = useSelector((state) => {
-    return state.cartShop;
-  });
 
   useEffect(() => {
     const fetchShallowShopDetails = async () => {
@@ -106,7 +100,6 @@ const ShopPage = (props) => {
         <ItemTabs
           categories={shop ? shop.categories : []}
           items={itemsList ? itemsList : []}
-          cart={cart}
         ></ItemTabs>
       </Box>
     </Box>

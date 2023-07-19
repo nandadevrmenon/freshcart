@@ -1,24 +1,21 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import theme from "theme";
 import ShopItem from "./ShopItem";
-import { useMemo } from "react";
 
 const ItemTabs = (props) => {
   const [category, setCategory] = React.useState(0);
   const handleChange = (event, newCat) => {
     setCategory(newCat);
   };
-
-  const cart = props.cart;
+  const cart = useSelector((state) => {
+    return state.cart;
+  });
   const items = props.items;
-
-  const itemCountArray = useMemo(() => {
-    return items.map((item) => cart[item] || 0);
-  }, [cart, items]);
-
+  const categories = props.categories;
   return (
     //returns all the tabs required that change the value on click
     <Box sx={{ width: "100%" }}>
@@ -37,23 +34,23 @@ const ItemTabs = (props) => {
           }}
         >
           <Tab label={"All Items"}></Tab>
-          {props.categories &&
-            props.categories.map((category) => (
+          {categories &&
+            categories.map((category) => (
               <Tab key={category} label={category} />
             ))}
         </Tabs>
       </Box>
+      {/* returns one item panel in which the shop items change based on the filters */}
       <ItemsPanel category={category}>
         {items.map((item, index) => {
           return (
             <ShopItem
               item={item}
               key={item._id}
-              count={itemCountArray[index]}
               show={
                 category === 0
                   ? true
-                  : item.category === props.categories[category - 1]
+                  : item.category === categories[category - 1]
               }
             ></ShopItem>
           );

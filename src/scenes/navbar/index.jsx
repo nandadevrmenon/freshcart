@@ -19,7 +19,9 @@ const NavBar = () => {
   const isLoggedIn = useSelector((state) => {
     return Boolean(state.user) && Boolean(state.token);
   });
-
+  const cart = useSelector((state) => {
+    return state.cart;
+  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -34,7 +36,7 @@ const NavBar = () => {
   const signOut = () => {
     dispatch(setLogout());
   };
-  console.log("renrednered nabar");
+
   return (
     <AppBar
       sx={{
@@ -175,7 +177,10 @@ const NavBar = () => {
                   outline: "none",
                 }}
               >
-                <Badge badgeContent={4} sx={{ color: theme.colors.white }}>
+                <Badge
+                  badgeContent={Object.keys(cart).length}
+                  sx={{ color: theme.colors.white }}
+                >
                   <LocalMallIcon sx={{ color: theme.colors.white }} />
                 </Badge>
               </IconButton>

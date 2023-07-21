@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 import ShopNavbar from "scenes/shopNavbar";
 import ShopHome from "scenes/shopHome";
 
-=======
 import ShopPage from "scenes/shopPage";
 
 import UserCart from "scenes/userCart/UserCart";

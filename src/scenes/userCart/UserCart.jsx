@@ -1,29 +1,27 @@
-
 import React from 'react';
 import { Box, Grid, Typography, TextField, Button, Card, CardContent, CardMedia, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { useDispatch, useSelector } from "react-redux";
+import { updateCart } from "state/auth";
+import ItemCountControl from '../../components/ItemCountControl'; // Import the ItemCountControl component
 
 const UserCart = () => {
-  const items = [
-    // Add your items here
-    { id: 1, name: 'Demo Item', quantity: 1, price: 19.99, image: 'demo-item.jpg' },
-    { id: 1, name: 'Demo Item', quantity: 1, price: 19.99, image: 'demo-item.jpg' },
-  ];
+  const dispatch = useDispatch();
+//   const cart = useSelector((state) => state.auth.cart);
+const cart = useSelector((state) => state.auth ? state.auth.cart : []);
+  const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <Box sx={{ padding: 14 }}>
       <Grid container spacing={4}>
         <Grid item xs={12} md={8}>
-          {items.map((item, index) => (
-            <Card sx={{ display: 'flex', marginBottom: 2 }} key={index}>
-              <CardMedia
-                component="img"
-                sx={{ width: 160 }}
-                image={item.image}
-                alt={item.name}
-              />
+          <Typography variant="h4" gutterBottom>
+            Your Cart
+          </Typography>
+          {cart.map((item) => (
+            <Card key={item.id} sx={{ display: 'flex', marginBottom: 2 }}>
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <CardContent sx={{ flex: '1 0 auto' }}>
                   <Typography component="h5" variant="h5">
@@ -33,18 +31,7 @@ const UserCart = () => {
                     ${item.price}
                   </Typography>
                 </CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', paddingLeft: 1, paddingBottom: 1 }}>
-                  <IconButton aria-label="remove">
-                    <RemoveIcon />
-                  </IconButton>
-                  <Typography>{item.quantity}</Typography>
-                  <IconButton aria-label="add">
-                    <AddIcon />
-                  </IconButton>
-                  <IconButton aria-label="delete">
-                    <DeleteIcon />
-                  </IconButton>
-                </Box>
+                <ItemCountControl productID={item.id} /> {/* Use the ItemCountControl component */}
               </Box>
             </Card>
           ))}
@@ -60,7 +47,7 @@ const UserCart = () => {
             margin="normal"
           />
           <Typography variant="h6" gutterBottom>
-            Subtotal: $59.97
+            Subtotal: ${itemCount}
           </Typography>
           <Typography variant="h6" gutterBottom>
             Delivery and Handling: $9.99

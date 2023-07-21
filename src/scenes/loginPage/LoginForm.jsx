@@ -7,7 +7,7 @@ import theme from "theme";
 import { Fragment } from "react";
 import PrimaryButton from "components/PrimaryButton";
 import { useDispatch } from "react-redux";
-import { setLogin, setShopLogin } from "state/auth";
+import { setLogin, setShopLogin } from "state/site";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("Required"),

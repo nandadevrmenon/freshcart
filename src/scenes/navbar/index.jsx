@@ -13,7 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import theme from "theme";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setLogout } from "state/auth";
+import { setLogout } from "state/site";
 
 const NavBar = () => {
   const isLoggedIn = useSelector((state) => {
@@ -22,6 +22,10 @@ const NavBar = () => {
   const cart = useSelector((state) => {
     return state.cart;
   });
+  const userID = useSelector((state) => {
+    return state.user ? state.user._id : "";
+  });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -36,6 +40,12 @@ const NavBar = () => {
   const signOut = () => {
     dispatch(setLogout());
   };
+
+  const goToCart = () => {
+    navigate(`/cart/${userID}`);
+  };
+
+  const promptLogin = () => {};
 
   return (
     <AppBar
@@ -171,6 +181,7 @@ const NavBar = () => {
 
             <Box display="flex" alignItems="center">
               <IconButton
+                onClick={isLoggedIn ? goToCart : promptLogin}
                 aria-label="chat"
                 style={{
                   border: "none",

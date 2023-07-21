@@ -21,12 +21,11 @@ const PrimaryButton = (props) => {
               : theme.colors.siteGreen,
             color: "white",
           },
+          fontFamily: "League Spartan",
         },
-        props.style && props.style,
       ]}
       variant="contained"
     >
-      {" "}
       {props.children}
     </Button>
   );

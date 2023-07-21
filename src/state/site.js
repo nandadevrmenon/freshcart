@@ -8,7 +8,7 @@ const initialState = {
   shop: null,
 };
 
-const authSlice = createSlice({
+const siteSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -26,7 +26,7 @@ const authSlice = createSlice({
     setLogout: (state) => {
       state.user = null;
       state.token = null;
-      state.cart = [];
+      state.cart = {};
       state.shop = null;
       state.cartShop = null;
     },
@@ -40,6 +40,6 @@ const authSlice = createSlice({
 });
 
 export const { updateCart, setLogin, setLogout, setShopLogin } =
-  authSlice.actions;
+  siteSlice.actions;
 
-export default authSlice.reducer;
+export default siteSlice.reducer;

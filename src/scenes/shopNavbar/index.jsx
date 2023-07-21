@@ -12,7 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import theme from "theme";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setLogout } from "state/auth";
+import { setLogout } from "state/site";
 
 const ShopNavbar = () => {
   const navigate = useNavigate();

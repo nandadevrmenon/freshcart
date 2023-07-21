@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { updateCart } from "state/auth";
+import { updateCart } from "state/site";
 import { Fragment, useState, useRef, useEffect } from "react";
 import { Box, Typography, Collapse, CardActions, Button } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";

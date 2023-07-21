@@ -14,7 +14,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import authReducer from "./state/auth";
+import authReducer from "./state/site";
 import { PersistGate } from "redux-persist/integration/react";
 
 const persistConfig = { key: "root", storage, version: 1 };

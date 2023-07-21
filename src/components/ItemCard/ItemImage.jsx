@@ -6,7 +6,7 @@ const ItemImage = (props) => {
       component="img"
       sx={{ height: "220px", objectFit: "cover" }}
       image={`http://localhost:3001/assets/${props.path}`}
-      title={props.altText}
+      title={props.alt}
     />
   );
 };

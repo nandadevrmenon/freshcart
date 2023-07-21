@@ -20,8 +20,8 @@ const TopDiscountedCarousel = (props) => {
             },
           }
         );
-        const data = await response.json();
-        setItems(data.items);
+        const items = await response.json();
+        setItems(items);
       } catch (error) {
         console.error("Error fetching top discounted items:", error);
       }
@@ -51,7 +51,7 @@ const TopDiscountedCarousel = (props) => {
         <Typography
           pb="0.5rem"
           mb="1.5rem"
-          variant="h6"
+          variant="h5"
           fontFamily="Poppins"
           fontWeight="400"
           color={theme.colors.siteGreen}
@@ -64,7 +64,6 @@ const TopDiscountedCarousel = (props) => {
         <Carousel
           swipeable={false}
           draggable={false}
-          showDots={true}
           responsive={responsive}
           ssr={true} // means to render carousel on server-side.
           infinite={true}

@@ -8,13 +8,17 @@ import Footer from "scenes/footer";
 import { useSelector } from "react-redux";
 import ShopNavbar from "scenes/shopNavbar";
 import ShopHome from "scenes/shopHome";
+
+=======
+import ShopPage from "scenes/shopPage";
+
 import UserCart from "scenes/userCart/UserCart";
 
 function App() {
   const isShop = useSelector((state) => {
     return Boolean(state.shop) && Boolean(state.token);
   });
-  console.log("rerendered app");
+
   return (
     <div className="app">
       <BrowserRouter>
@@ -25,6 +29,7 @@ function App() {
           <Route path="/profile/:userId" element={<ProfilePage />}></Route>
           <Route path="/checkout/:userId" element={<CheckoutPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/shops/:id" element={<ShopPage />}></Route>
           <Route path="/cart/:id" element={<UserCart />}></Route>
         </Routes>
         <Footer></Footer>

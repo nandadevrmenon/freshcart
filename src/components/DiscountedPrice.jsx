@@ -1,17 +1,20 @@
 import { Box, Typography } from "@mui/material";
 import theme from "theme";
 const DiscountedPrice = (props) => {
-  console.log(props.price);
   if (props.discount > 0) {
     const discountedPrice = (
       props.price -
       (props.price * props.discount) / 100
     ).toFixed(2);
     return (
-      <Box>
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        paddingX="10px"
+        marginBottom="7px"
+      >
         <Typography
-          paddingLeft="15px"
-          paddingRight="5px"
+          paddingRight="auto"
           textAlign="right"
           display="inline-block"
           color={theme.colors.headerRed}
@@ -19,8 +22,6 @@ const DiscountedPrice = (props) => {
           €{discountedPrice}
         </Typography>
         <Typography
-          paddingRight="10px"
-          paddingLeft="10px"
           color="text.secondary"
           textAlign="right"
           display="inline-block"
@@ -32,7 +33,12 @@ const DiscountedPrice = (props) => {
     );
   }
   return (
-    <Typography paddingX="10px" color="text.secondary" textAlign="right">
+    <Typography
+      paddingX="10px"
+      color="text.secondary"
+      textAlign="right"
+      marginBottom="7px"
+    >
       €{props.price}
     </Typography>
   );

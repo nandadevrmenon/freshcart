@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: null,
   token: null,
-  cart: [],
+  cart: {},
   cartShop: null,
   shop: null,
 };
@@ -12,20 +12,23 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setCart: (state, action) => {
-      state.cart = { ...state.cart, ...action.payload.item };
+    updateCart: (state, action) => {
+      const { item, count } = action.payload;
+      if (count === 0) delete state.cart[item];
+      else state.cart[item] = count;
     },
     setLogin: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.cart = { ...state.cart, ...action.payload.user.cart };
+      state.cartShop = action.payload.user.cartShop;
     },
     setLogout: (state) => {
       state.user = null;
       state.token = null;
-      state.cart = null;
+      state.cart = [];
       state.shop = null;
-      state.cartShop = [];
+      state.cartShop = null;
     },
     setShopLogin: (state, action) => {
       delete state.cart;
@@ -36,6 +39,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCart, setLogin, setLogout, setShopLogin } = authSlice.actions;
+export const { updateCart, setLogin, setLogout, setShopLogin } =
+  authSlice.actions;
 
 export default authSlice.reducer;

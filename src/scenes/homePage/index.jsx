@@ -2,6 +2,7 @@ import React from "react";
 import HeroCarousel from "./HeroCarousel";
 import TinyBanner from "./TinyBanner";
 import TopDiscountedCarousel from "./TopDisCountCarousel";
+import PopularStoresNearYou from "./PopularStoresNearYou";
 
 const HomePage = () => {
   return (
@@ -9,7 +10,7 @@ const HomePage = () => {
       <HeroCarousel />
       <TinyBanner />
       <TopDiscountedCarousel></TopDiscountedCarousel>
-      {/* <PopularShopsNearYou></PopularShopsNearYou> */}
+      <PopularStoresNearYou></PopularStoresNearYou>
     </React.Fragment>
   );
 };

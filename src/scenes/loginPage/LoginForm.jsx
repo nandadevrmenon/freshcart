@@ -42,6 +42,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [pageType, setPageType] = useState("login");
   const [loginError, setLoginError] = useState("");
+  const [signUpError, setSignUpError] = useState(false);
   const dispatch = useDispatch();
 
   const invalidPW = loginError === "invalid pw";
@@ -78,9 +79,17 @@ const LoginForm = () => {
         body: JSON.stringify(values),
       }
     );
-    const savedUser = savedUserResponse.json();
-    onSubmitProps.resetForm();
-    if (savedUser) setPageType("login");
+    const savedUser = await savedUserResponse.json();
+    const errorWhileSaving = savedUser.error;
+
+    if (errorWhileSaving && errorWhileSaving.includes("duplicate key error")) {
+      setSignUpError(true);
+      console.log(signUpError);
+    } else {
+      onSubmitProps.resetForm();
+      setSignUpError(false);
+      if (savedUser) setPageType("login");
+    }
   };
 
   const login = async (values, onSubmitProps, isShopLoginPage) => {
@@ -247,8 +256,20 @@ const LoginForm = () => {
                     }}
                   >
                     {invalidPW
-                      ? "Invalid Email Password Combination"
+                      ? "Invalid Email Password Combination."
                       : "User does not exist."}
+                  </Typography>
+                )}
+                {signUpError && (
+                  <Typography
+                    marginX="auto"
+                    marginBottom="1rem"
+                    color="red"
+                    sx={{
+                      textAlign: "center",
+                    }}
+                  >
+                    User with same email already exists.
                   </Typography>
                 )}
                 <PrimaryButton invert={true} fullWidth={true} type="submit">

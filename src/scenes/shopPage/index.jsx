@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import theme from "theme";
 import ItemTabs from "./ItemTabs";
 import ShopInfoBar from "./ShopInfoBar";
-import { useSelector } from "react-redux";
 
 const ShopPage = (props) => {
   const { id } = useParams();

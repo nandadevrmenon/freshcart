@@ -23,7 +23,6 @@ const PopularStoresNearYou = () => {
           }
         );
         const items = await response.json();
-        console.log(items);
         setShops(items);
       } catch (error) {
         console.error("Error fetching Popular Stores:", error);

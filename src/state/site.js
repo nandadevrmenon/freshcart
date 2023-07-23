@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useEffect } from "react";
 
 const initialState = {
   user: null,
@@ -31,7 +32,7 @@ const siteSlice = createSlice({
       state.cartShop = null;
     },
     setShopLogin: (state, action) => {
-      delete state.cart;
+      state.cart = {};
       delete state.cartShop;
       state.shop = action.payload.shop;
       state.token = action.payload.token;

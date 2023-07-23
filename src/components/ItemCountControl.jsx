@@ -8,6 +8,9 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import theme from "theme";
 
 const ItemCountControl = (props) => {
+  const isUser = useSelector((state) => {
+    return Boolean(state.user) && Boolean(state.token);
+  });
   const cart = useSelector((state) => {
     return state.cart;
   });
@@ -35,7 +38,6 @@ const ItemCountControl = (props) => {
             count: ItemCount,
           })
         );
-        console.log("update Local Cart");
       }, 1000);
     };
 
@@ -55,12 +57,13 @@ const ItemCountControl = (props) => {
   };
 
   const decreaseItemCount = () => {
-    console.log("decreasing");
     setItemCount((prev) => {
       const updatedCount = prev - 1;
       return updatedCount >= 0 ? updatedCount : 0;
     });
   };
+
+  const promptLogin = () => {};
   return (
     <Fragment>
       <Collapse in={ItemCount === 0} unmountOnExit>
@@ -68,7 +71,7 @@ const ItemCountControl = (props) => {
           <Button
             size="small"
             variant="contained"
-            onClick={increaseItemCount}
+            onClick={isUser ? increaseItemCount : promptLogin}
             sx={{
               backgroundColor: theme.colors.siteDarkGreen,
               ":hover": {

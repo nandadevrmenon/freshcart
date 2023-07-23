@@ -13,6 +13,7 @@ import ShopHome from "scenes/shopHome";
 import ShopPage from "scenes/shopPage";
 import NoAccess from "scenes/NoAccessPage";
 import UserCart from "scenes/userCart/UserCart";
+import ShopProductsPage from "scenes/shopProductsPage";
 
 function App() {
   const isShop = useSelector((state) => {
@@ -81,6 +82,10 @@ function App() {
                 <Route
                   path="/protected/:id/home"
                   element={<ShopHome />}
+                ></Route>
+                <Route
+                  path="/protected/:id/products"
+                  element={<ShopProductsPage />}
                 ></Route>
               </React.Fragment>
             ) : (

@@ -30,10 +30,17 @@ const ShopNavbar = () => {
     navigate("/");
   };
 
+  const goToProductsPage = () => {
+    navigate(`/protected/${userId}/products`);
+  };
+  const goToShopEditPage = () => {
+    navigate(`/protected/${userId}/editshop`);
+  };
+
   return (
     <AppBar
       sx={{
-        bgcolor: "#44AF69",
+        bgcolor: theme.colors.siteGreen,
         zIndex: (uitheme) => uitheme.zIndex.drawer + 1,
       }}
     >
@@ -93,6 +100,7 @@ const ShopNavbar = () => {
                 }}
               >
                 <Typography
+                  onClick={goToProductsPage}
                   fontFamily="Poppins"
                   variant="h6"
                   sx={{ textTransform: "initial !important" }}
@@ -114,6 +122,7 @@ const ShopNavbar = () => {
                   fontFamily="Poppins"
                   variant="h6"
                   sx={{ textTransform: "initial !important" }}
+                  onClick={goToShopEditPage}
                 >
                   Edit Shop
                 </Typography>

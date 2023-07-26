@@ -2,11 +2,13 @@ import { Box, Typography } from "@mui/material";
 import DiscountedPrice from "components/DiscountedPrice";
 import theme from "theme";
 import ItemCountControl from "../../components/ItemCountControl";
+import { useState } from "react";
 
 const CartItem = (props) => {
+  const [show, setShow] = useState(props.show);
   return (
     <Box
-      display={props.show ? "flex" : "none"}
+      display={show ? "flex" : "none"}
       overflow="hidden"
       width="90%"
       marginX="auto"
@@ -50,15 +52,15 @@ const CartItem = (props) => {
             {props.item.size}
           </Typography>
         </Box>
-        {/* <Box marginRight="1rem">
+        <Box marginRight="1rem">
           <DiscountedPrice
             price={props.item.price ? props.item.price.toFixed(2) : 0}
             discount={props.item.discount}
           />
           <ItemCountControl productID={props.item._id}></ItemCountControl>
-        </Box> */}
+        </Box>
       </Box>
-      {/* <Box
+      <Box
         display="flex"
         justifyContent="center"
         alignItems="center"
@@ -73,8 +75,8 @@ const CartItem = (props) => {
             borderRadius: "10px",
           }}
           src={`http://localhost:3001/assets/${props.item.imagePath}`}
-        ></Box> */}
-      {/* </Box> */}
+        ></Box>
+      </Box>
     </Box>
   );
 };

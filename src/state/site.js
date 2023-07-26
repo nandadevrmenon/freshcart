@@ -15,8 +15,18 @@ const siteSlice = createSlice({
   reducers: {
     updateCart: (state, action) => {
       const { item, count } = action.payload;
-      if (count === 0) delete state.cart[item];
-      else state.cart[item] = count;
+      if (count === 0) {
+        delete state.cart[item];
+        if (Object.keys(state.cart).length === 0) {
+          state.cartShop = ""; // Set cartShop to empty string if the cart is empty
+        }
+      } else {
+        state.cart[item] = count;
+      }
+    },
+    updateCartShop: (state, action) => {
+      const { shopId } = action.payload;
+      state.cartShop = shopId;
     },
     setLogin: (state, action) => {
       state.user = action.payload.user;
@@ -40,7 +50,7 @@ const siteSlice = createSlice({
   },
 });
 
-export const { updateCart, setLogin, setLogout, setShopLogin } =
+export const { updateCart, setLogin, setLogout, setShopLogin, updateCartShop } =
   siteSlice.actions;
 
 export default siteSlice.reducer;

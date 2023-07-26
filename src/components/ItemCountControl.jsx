@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { updateCart } from "state/site";
+import { updateCart, updateCartShop } from "state/site";
 import { Fragment, useState, useRef, useEffect } from "react";
 import { Box, Typography, Collapse, CardActions, Button } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -14,7 +14,10 @@ const ItemCountControl = (props) => {
   const cart = useSelector((state) => {
     return state.cart;
   });
-  const { productID } = props;
+  const cartShop = useSelector((state) => {
+    return state.cartShop;
+  });
+  const { productID, shopId } = props;
   const count = cart[productID] || 0;
 
   const [ItemCount, setItemCount] = useState(count);
@@ -49,11 +52,18 @@ const ItemCountControl = (props) => {
   }, [ItemCount]); // Add ItemCount to the dependency array
 
   const increaseItemCount = () => {
-    setItemCount((prev) => {
-      if (prev === 0) {
+    if (shopId === cartShop || !cartShop) {
+      if (!cartShop) {
+        dispatch(
+          updateCartShop({
+            shopId: shopId,
+          })
+        );
       }
-      return prev + 1;
-    });
+      setItemCount((prev) => {
+        return prev + 1;
+      });
+    }
   };
 
   const decreaseItemCount = () => {

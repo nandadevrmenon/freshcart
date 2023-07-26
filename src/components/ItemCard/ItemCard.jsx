@@ -29,7 +29,10 @@ const ItemCard = (props) => {
             price={props.item.price.toFixed(2)}
             discount={props.item.discount}
           />
-          <ItemCountControl productID={props.item._id}></ItemCountControl>
+          <ItemCountControl
+            productID={props.item._id}
+            shopId={props.item.shopId}
+          ></ItemCountControl>
         </CardContent>
       </Box>
     </Card>

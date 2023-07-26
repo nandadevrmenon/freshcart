@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, TextField } from "@mui/material";
 import { useSelector } from "react-redux";
+import PrimaryButton from "components/PrimaryButton";
 import theme from "theme";
 import CartItem from "./CartItem";
 
@@ -33,10 +34,13 @@ const UserCart = () => {
     }
   }, []);
 
-  // const cartTotal = Object.values(cart).reduce(
-  //   (total, item) => total + item.quantity,
-  //   0
-  // );
+  const cartTotal = Object.values(cartItems).reduce((total, item) => {
+    if (localCart[item._id]) {
+      return total + item.price * localCart[item._id];
+    } else {
+      return total;
+    }
+  }, 0);
 
   return (
     // <Box sx={{ padding: 14 }}>
@@ -53,27 +57,7 @@ const UserCart = () => {
     //       <Typography variant="h4" gutterBottom>
     //         Have a Promo Code?
     //       </Typography>
-    //       <TextField
-    //         label="Enter code"
-    //         variant="outlined"
-    //         fullWidth
-    //         margin="normal"
-    //       />
-    //       <Typography variant="h6" gutterBottom>
-    //         Subtotal: ${itemCount}
-    //       </Typography>
-    //       <Typography variant="h6" gutterBottom>
-    //         Delivery and Handling: \$9.99
-    //       </Typography>
-    //       <Button
-    //         variant="contained"
-    //         color="primary"
-    //         size="large"
-    //         fullWidth
-    //         margin="normal"
-    //       >
-    //         Place Order
-    //       </Button>
+    //
     //     </Grid>
     //   </Grid>
     // </Box>
@@ -96,12 +80,7 @@ const UserCart = () => {
           Your Cart
         </Typography>
         {Object.keys(localCart).length === 0 ? (
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            minHeight="100vh"
-          >
+          <Box display="flex" justifyContent="center" alignItems="center">
             <Typography variant="h5">Your cart is empty.</Typography>
           </Box>
         ) : (
@@ -112,14 +91,16 @@ const UserCart = () => {
             justifyContent="start"
           >
             {cartItems.map((item) => {
-              return <CartItem item={item}></CartItem>;
+              return (
+                <CartItem item={item} key={item._id} show={true}></CartItem>
+              );
             })}
           </Box>
         )}
       </Box>
       <Box sx={{ gridColumn: "7/9" }}>
         <Typography
-          paddingTop="1.4rem"
+          paddingTop="3.5rem"
           variant="h6"
           color={theme.colors.siteDarkGreen}
           fontFamily="Poppins"
@@ -127,6 +108,28 @@ const UserCart = () => {
         >
           Have a Promo Code?
         </Typography>
+        <TextField
+          label="Enter code"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+        />
+        <Typography variant="h6" gutterBottom>
+          Subtotal:€{cartTotal}
+        </Typography>
+        <Typography variant="h6" gutterBottom>
+          Delivery and Handling: \€9.99
+        </Typography>
+        <PrimaryButton
+          variant="contained"
+          color="primary"
+          size="large"
+          fullWidth
+          margin="normal"
+          invert={true}
+        >
+          Place Order
+        </PrimaryButton>
         <Box display="flex"></Box>
       </Box>
     </Box>

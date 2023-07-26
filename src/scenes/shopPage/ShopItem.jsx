@@ -53,10 +53,12 @@ const ShopItem = (props) => {
         <Box marginRight="1rem">
           <DiscountedPrice
             price={props.item.price ? props.item.price.toFixed(2) : 0}
-
             discount={props.item.discount}
           />
-          <ItemCountControl productID={props.item._id}></ItemCountControl>
+          <ItemCountControl
+            productID={props.item._id}
+            shopId={props.item.shopId}
+          ></ItemCountControl>
         </Box>
       </Box>
       <Box
@@ -78,7 +80,6 @@ const ShopItem = (props) => {
       </Box>
     </Box>
   );
-
 };
 
 export default ShopItem;

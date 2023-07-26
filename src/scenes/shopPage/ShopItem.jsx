@@ -52,7 +52,8 @@ const ShopItem = (props) => {
         </Box>
         <Box marginRight="1rem">
           <DiscountedPrice
-            price={props.item.price.toFixed(2)}
+            price={props.item.price ? props.item.price.toFixed(2) : 0}
+
             discount={props.item.discount}
           />
           <ItemCountControl productID={props.item._id}></ItemCountControl>
@@ -77,6 +78,7 @@ const ShopItem = (props) => {
       </Box>
     </Box>
   );
+
 };
 
 export default ShopItem;

@@ -1,17 +1,19 @@
 import React from 'react';
-import { Box, Grid, Typography, TextField, Button, Card, CardContent, CardMedia, IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import { useDispatch, useSelector } from "react-redux";
-import { updateCart } from "state/auth";
-import ItemCountControl from '../../components/ItemCountControl'; // Import the ItemCountControl component
+import { Box, Grid, Typography, TextField, Button} from '@mui/material';
+import { useSelector } from "react-redux";
+import CartItem from "../../../src/components/cartItem/CartItem";
 
 const UserCart = () => {
-  const dispatch = useDispatch();
-//   const cart = useSelector((state) => state.auth.cart);
-const cart = useSelector((state) => state.auth ? state.auth.cart : []);
-  const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+  const cart = useSelector((state) => state.cart);
+  const itemCount = Object.values(cart).reduce((total, item) => total + item.quantity, 0);
+
+  if (Object.keys(cart).length === 0) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="60vh">
+        <Typography variant="h5">Your cart is empty.</Typography>
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ padding: 14 }}>
@@ -20,21 +22,9 @@ const cart = useSelector((state) => state.auth ? state.auth.cart : []);
           <Typography variant="h4" gutterBottom>
             Your Cart
           </Typography>
-          {cart.map((item) => (
-            <Card key={item.id} sx={{ display: 'flex', marginBottom: 2 }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                <CardContent sx={{ flex: '1 0 auto' }}>
-                  <Typography component="h5" variant="h5">
-                    {item.name}
-                  </Typography>
-                  <Typography variant="subtitle1" color="text.secondary">
-                    ${item.price}
-                  </Typography>
-                </CardContent>
-                <ItemCountControl productID={item.id} /> {/* Use the ItemCountControl component */}
-              </Box>
-            </Card>
-          ))}
+          {Object.keys(cart).map((itemId) => (
+        <CartItem key={itemId} item={cart[itemId]} />
+      ))}
         </Grid>
         <Grid item xs={12} md={4}>
           <Typography variant="h4" gutterBottom>
@@ -50,7 +40,7 @@ const cart = useSelector((state) => state.auth ? state.auth.cart : []);
             Subtotal: ${itemCount}
           </Typography>
           <Typography variant="h6" gutterBottom>
-            Delivery and Handling: $9.99
+            Delivery and Handling: \$9.99
           </Typography>
           <Button
             variant="contained"
@@ -66,5 +56,37 @@ const cart = useSelector((state) => state.auth ? state.auth.cart : []);
     </Box>
   );
 };
-
 export default UserCart;
+
+// import { useSelector } from "react-redux";
+// import { Box, Typography } from "@mui/material";
+// import ShopItem from "../../../src/scenes/shopPage/ShopItem";
+
+// const UserCart = () => {
+//   const cart = useSelector((state) => state.cart);
+
+//   return (
+//     <Box
+//       display="flex"
+//       flexDirection="column"
+//       alignItems="center"
+//       justifyContent="center"
+//       padding="2rem"
+//     >
+//       <Typography variant="h4" marginBottom="2rem">
+//         Your Cart
+//       </Typography>
+//       {Object.keys(cart).length === 0 ? (
+//         <Typography variant="h6">Your cart is empty</Typography>
+//       ) : (
+//         Object.keys(cart).map((itemId) => (
+//           <ShopItem key={itemId} item={cart[itemId]} show={true} />
+          
+//         ))
+//       )}
+//     </Box>
+//   );
+// };
+
+
+// export default UserCart;

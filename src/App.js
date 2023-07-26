@@ -12,7 +12,7 @@ import ShopNavbar from "scenes/shopNavbar";
 import ShopHome from "scenes/shopHome";
 import ShopPage from "scenes/shopPage";
 import NoAccess from "scenes/NoAccessPage";
-import UserCart from "scenes/userCart/UserCart";
+import UserCart from "scenes/userCart";
 import ShopProductsPage from "scenes/shopProductsPage";
 
 function App() {

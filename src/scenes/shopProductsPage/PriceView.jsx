@@ -29,6 +29,7 @@ const PriceView = (props) => {
         display="block"
         textAlign="right"
         color={theme.colors.headerRed}
+        marginBottom="1rem"
       >
         Selling Price : €{reducedPrice}
       </Typography>

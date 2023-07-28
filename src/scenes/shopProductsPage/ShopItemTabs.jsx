@@ -11,13 +11,14 @@ import { Typography } from "@mui/material";
 const ShopItemsTabs = (props) => {
   const [category, setCategory] = React.useState(0);
   const [allItems, setAllItems] = React.useState([]);
-  const handleChange = (event, newCat) => {
-    setCategory(newCat);
-  };
-
   const shop = useSelector((state) => {
     return state.shop;
   });
+  const categories = shop.categories;
+
+  const handleChange = (event, newCat) => {
+    setCategory(newCat);
+  };
 
   useEffect(() => {
     const fetchAllItems = async () => {
@@ -38,18 +39,9 @@ const ShopItemsTabs = (props) => {
     fetchAllItems();
   }, []);
 
-  const categories = shop.categories;
   return (
     //returns all the tabs required that change the value on click
-    <Box sx={{ width: "80%", marginTop: "4rem", marginX: "auto" }}>
-      <Typography
-        paddingY="1rem"
-        variant="h4"
-        fontFamily="Poppins"
-        color={theme.colors.headerGreen}
-      >
-        Manage Products
-      </Typography>
+    <React.Fragment>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={category}
@@ -83,11 +75,12 @@ const ShopItemsTabs = (props) => {
                   ? true
                   : item.category === categories[category - 1]
               }
+              changeItemInForm={props.changeItemInForm}
             ></EditableItem>
           );
         })}
       </ItemsPanel>
-    </Box>
+    </React.Fragment>
   );
 };
 

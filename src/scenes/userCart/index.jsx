@@ -36,7 +36,11 @@ const UserCart = () => {
 
   const cartTotal = Object.values(cartItems).reduce((total, item) => {
     if (localCart[item._id]) {
-      return total + item.price * localCart[item._id];
+      return (
+        total +
+        (item.price - (item.price * item.discount) / 100).toFixed(2) *
+          localCart[item._id]
+      );
     } else {
       return total;
     }

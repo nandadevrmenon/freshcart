@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import theme from "theme";
 import PriceView from "./PriceView";
 import PrimaryButton from "components/PrimaryButton";
@@ -64,13 +64,19 @@ const EditableItem = (props) => {
         </Box>
         <Box marginRight="1rem">
           <PriceView price={props.item.price} discount={props.item.discount} />
-          <PrimaryButton
-            invert={true}
-            fullWidth={true}
-            onClick={updateEditItemForm}
-          >
-            Edit Item
-          </PrimaryButton>
+          {props.updateInProgress ? (
+            <Button variant="contained" disabled>
+              Update In Progress
+            </Button>
+          ) : (
+            <PrimaryButton
+              invert={true}
+              fullWidth={true}
+              onClick={updateEditItemForm}
+            >
+              Edit Item
+            </PrimaryButton>
+          )}
         </Box>
       </Box>
       <Box

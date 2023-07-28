@@ -11,6 +11,11 @@ const theme = {
     grey: "#ABABAB",
     darkGrey: "#666666",
     siteDarkGreen: "#399359",
+    dangerRed: "#E82929",
+    darkDangerRed: "#C41010",
+    warningYellow: "#F3AE0B",
+    darkWarningYellow: "#DFA00E",
+    blackGreen: "#1D3427",
   },
 };
 

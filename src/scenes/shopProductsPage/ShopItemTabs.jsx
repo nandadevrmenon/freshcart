@@ -76,6 +76,7 @@ const ShopItemsTabs = (props) => {
                   : item.category === categories[category - 1]
               }
               changeItemInForm={props.changeItemInForm}
+              updateInProgress={props.updateInProgress}
             ></EditableItem>
           );
         })}

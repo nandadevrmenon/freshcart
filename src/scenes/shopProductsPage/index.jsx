@@ -20,9 +20,18 @@ const ShopProductsPage = () => {
       >
         Manage Products
       </Typography>
-      {/* show={Boolean(itemInForm)} */}
-      <EditItemForm item={itemInForm}></EditItemForm>
-      <ShopItemsTabs changeItemInForm={changeItemInForm}></ShopItemsTabs>
+      {itemInForm ? (
+        <EditItemForm
+          item={itemInForm}
+          changeItemInForm={changeItemInForm}
+        ></EditItemForm>
+      ) : (
+        ""
+      )}
+      <ShopItemsTabs
+        updateInProgress={Boolean(itemInForm)}
+        changeItemInForm={changeItemInForm}
+      ></ShopItemsTabs>
     </Box>
   );
 };

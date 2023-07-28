@@ -81,7 +81,9 @@ const UserCart = () => {
         </Typography>
         {Object.keys(localCart).length === 0 ? (
           <Box display="flex" justifyContent="center" alignItems="center">
-            <Typography variant="h5">Your cart is empty.</Typography>
+            <Typography variant="h5" marginTop="20%">
+              Your cart is empty.
+            </Typography>
           </Box>
         ) : (
           <Box
@@ -118,7 +120,7 @@ const UserCart = () => {
           Subtotal:€{cartTotal}
         </Typography>
         <Typography variant="h6" gutterBottom>
-          Delivery and Handling: \€9.99
+          Delivery and Handling: €3.49
         </Typography>
         <PrimaryButton
           variant="contained"

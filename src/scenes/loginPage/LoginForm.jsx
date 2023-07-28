@@ -173,6 +173,7 @@ const LoginForm = () => {
         handleSubmit,
         setFieldValue,
         resetForm,
+        enableReinitialize,
       }) => {
         return (
           <form onSubmit={handleSubmit}>

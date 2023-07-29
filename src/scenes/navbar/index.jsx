@@ -39,6 +39,7 @@ const NavBar = () => {
 
   const signOut = () => {
     dispatch(setLogout());
+    navigate("/");
   };
 
   const goToCart = () => {

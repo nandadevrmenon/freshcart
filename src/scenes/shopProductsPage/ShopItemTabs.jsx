@@ -10,7 +10,9 @@ import { Typography } from "@mui/material";
 
 const ShopItemsTabs = (props) => {
   const [category, setCategory] = React.useState(0);
-  const [allItems, setAllItems] = React.useState([]);
+  const allItems = useSelector((state) => {
+    return state.items;
+  });
   const shop = useSelector((state) => {
     return state.shop;
   });
@@ -19,25 +21,6 @@ const ShopItemsTabs = (props) => {
   const handleChange = (event, newCat) => {
     setCategory(newCat);
   };
-
-  useEffect(() => {
-    const fetchAllItems = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3001/items/inshop/${shop._id}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-        const items = await response.json();
-        setAllItems(items);
-      } catch (error) {
-        console.error("Error fetching top discounted items:", error);
-      }
-    };
-    fetchAllItems();
-  }, []);
 
   return (
     //returns all the tabs required that change the value on click

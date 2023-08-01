@@ -4,9 +4,10 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import theme from "theme";
 import PrimaryButton from "components/PrimaryButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DangerButton from "components/DangerButton";
-import CancelIcon from "@mui/icons-material/Cancel";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { updateShopItem } from "state/site";
 
 const itemSchema = yup.object().shape({
   name: yup.string().required("Required"),
@@ -21,13 +22,6 @@ const itemSchema = yup.object().shape({
     .required("Required"),
 });
 
-// const LoginForm = () => {
-//   const navigate = useNavigate();
-//   const [pageType, setPageType] = useState("login");
-//   const [loginError, setLoginError] = useState("");
-//   const [signUpError, setSignUpError] = useState(false);
-//   const dispatch = useDispatch();
-
 const EditItemForm = (props) => {
   const item = props.item;
   const initialItemValues = {
@@ -37,46 +31,55 @@ const EditItemForm = (props) => {
     price: item.price,
     discount: item.discount,
   };
-
   const shop = useSelector((state) => {
     return state.shop;
   });
-  const categories = shop.categories;
+  const shopToken = useSelector((state) => {
+    return state.token;
+  });
 
+  const categories = shop.categories;
+  const dispatch = useDispatch();
   const handleFormSubmit = async (values, onSubmitProps) => {
-    console.log("formSubmiteed");
+    updateItem(values, onSubmitProps);
   };
 
   const cancelUpdateHandler = () => {
     props.changeItemInForm(null);
   };
 
-  // const updateItem = async (values, onSubmitProps, isShopLoginPage) => {
-  //   const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(values),
-  //   });
-  //   const loggedIn = await loggedInResponse.json();
-  //   if (loggedIn.msg === "Invalid Email Password Combination.")
-  //     setLoginError("invalid pw");
-  //   else if (loggedIn.msg === "User Does Not Exist.") setLoginError("no user");
-  //   else {
-  //     onSubmitProps.resetForm();
-  //     if (loggedIn) {
-  //       dispatch(
-  //         setLogin({
-  //           user: loggedIn.user,
-  //           token: loggedIn.token,
-  //           cart: loggedIn.user.cart,
-  //         })
-  //       );
-  //       navigate("/");
-  //     }
-  //   }
-  // };
+  const promptDeletionModal = () => {};
+
+  const updateItem = async (values, onSubmitProps) => {
+    const changesInItem = {};
+    for (const [key, value] of Object.entries(values)) {
+      if (value !== item[key]) {
+        changesInItem[key] = value;
+      }
+    }
+
+    if (Object.keys(changesInItem).length !== 0) {
+      const newItem = await fetch(
+        `http://localhost:3001/protected/${shop._id}/${item._id}/updateItem`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${shopToken}`,
+          },
+          body: JSON.stringify(changesInItem),
+        }
+      );
+      const updatedItem = await newItem.json();
+      cancelUpdateHandler();
+      dispatch(
+        updateShopItem({
+          item: updatedItem,
+        })
+      );
+      console.log(updatedItem);
+    }
+  };
 
   return (
     <Box>
@@ -113,15 +116,15 @@ const EditItemForm = (props) => {
                   alignItems="center"
                   justifyContent="end"
                 >
-                  <CancelIcon
+                  <DeleteIcon
                     sx={{
                       padding: "0.5rem",
                       margin: "0.5rem",
                       color: theme.colors.blackGreen,
                       ":hover": { cursor: "pointer" },
                     }}
-                    onClick={cancelUpdateHandler}
-                  ></CancelIcon>
+                    onClick={promptDeletionModal}
+                  ></DeleteIcon>
                 </Box>
                 <Box
                   marginBottom="1rem"
@@ -207,19 +210,13 @@ const EditItemForm = (props) => {
                   <PrimaryButton invert={true} fullWidth={true} type="submit">
                     Update Item
                   </PrimaryButton>
-                  {/* <WarningButton
-                  invert={true}
-                  fullWidth={true}
-                  onClick={cancelUpdateHandler}
-                >
-                  Cancel Update
-                </WarningButton> */}
+
                   <DangerButton
                     invert={true}
                     fullWidth={true}
                     onClick={cancelUpdateHandler}
                   >
-                    Delete Item
+                    Cancel Update
                   </DangerButton>
                 </Box>
               </Box>

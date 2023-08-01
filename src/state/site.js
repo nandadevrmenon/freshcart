@@ -31,7 +31,7 @@ const siteSlice = createSlice({
     setLogin: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
-      state.cart = { ...state.cart, ...action.payload.user.cart };
+      state.cart = action.payload.cart;
       state.cartShop = action.payload.user.cartShop;
     },
     setLogout: (state) => {
@@ -40,17 +40,32 @@ const siteSlice = createSlice({
       state.cart = {};
       state.shop = null;
       state.cartShop = null;
+      state.items = null;
     },
     setShopLogin: (state, action) => {
       state.cart = {};
       delete state.cartShop;
       state.shop = action.payload.shop;
       state.token = action.payload.token;
+      state.items = action.payload.items;
+    },
+    updateShopItem: (state, action) => {
+      const newItem = action.payload.item;
+      state.items = state.items.map((item) => {
+        if (item._id === newItem._id) return newItem;
+        return item;
+      });
     },
   },
 });
 
-export const { updateCart, setLogin, setLogout, setShopLogin, updateCartShop } =
-  siteSlice.actions;
+export const {
+  updateCart,
+  setLogin,
+  setLogout,
+  setShopLogin,
+  updateCartShop,
+  updateShopItem,
+} = siteSlice.actions;
 
 export default siteSlice.reducer;

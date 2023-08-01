@@ -92,7 +92,7 @@ const LoginForm = () => {
     }
   };
 
-  const login = async (values, onSubmitProps, isShopLoginPage) => {
+  const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
       method: "POST",
       headers: {
@@ -141,6 +141,7 @@ const LoginForm = () => {
           setShopLogin({
             shop: loggedIn.shop,
             token: loggedIn.token,
+            items: loggedIn.items,
           })
         );
         navigate(`/protected/${loggedIn.shop._id}/home`);

@@ -7,7 +7,6 @@ import EditItemForm from "./EditItemForm";
 const ShopProductsPage = () => {
   const [itemInForm, setItemInForm] = useState(null);
   const changeItemInForm = (item) => {
-    console.log("item changes to", item);
     setItemInForm(item);
   };
   return (

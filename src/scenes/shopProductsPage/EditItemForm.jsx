@@ -72,12 +72,12 @@ const EditItemForm = (props) => {
       );
       const updatedItem = await newItem.json();
       cancelUpdateHandler();
+      onSubmitProps.resetForm();
       dispatch(
         updateShopItem({
           item: updatedItem,
         })
       );
-      console.log(updatedItem);
     }
   };
 

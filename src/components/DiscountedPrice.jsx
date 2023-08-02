@@ -10,7 +10,7 @@ const DiscountedPrice = (props) => {
       <Box
         display="flex"
         justifyContent="space-between"
-        paddingX="10px"
+        paddingX="5px"
         marginBottom="7px"
       >
         <Typography

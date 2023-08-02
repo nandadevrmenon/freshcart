@@ -3,10 +3,10 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import theme from "theme";
 import PrimaryButton from "components/PrimaryButton";
-
 import DangerButton from "components/DangerButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { useSelector } from "react-redux";
+import Dropzone from "react-dropzone";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 
 const itemSchema = yup.object().shape({
   name: yup.string().required("Required"),
@@ -19,22 +19,51 @@ const itemSchema = yup.object().shape({
     .min(0)
     .max(99)
     .required("Required"),
+  image: yup.string().required("Required"),
 });
 
 const initialItemValues = {
   name: "",
-  categories: "",
+  category: "",
   size: "",
   price: 10,
   discount: 0,
+  image: "",
 };
 
 const AddNewItemPage = (props) => {
   const categories = useSelector((state) => {
     return state.shop.categories;
   });
+  const shop = useSelector((state) => {
+    return state.shop;
+  });
+  const shopToken = useSelector((state) => {
+    return state.token;
+  });
+  const shopName = shop.name;
+  const shopId = shop._id;
   const handleFormSubmit = async (values, onSubmitProps) => {
-    console.log(values);
+    const formData = new FormData();
+    for (let value in values) {
+      formData.append(value, values[value]);
+    }
+    formData.append("imagePath", values.image.name);
+    formData.append("shopName", shopName);
+    const savedItemResponse = await fetch(
+      `http://localhost:3001/protected/${shopId}/addnewitem`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${shopToken}`,
+        },
+        body: formData,
+      }
+    );
+
+    const savedItem = await savedItemResponse.json();
+    console.log(savedItem);
+    onSubmitProps.resetForm();
   };
 
   return (
@@ -149,6 +178,58 @@ const AddNewItemPage = (props) => {
                         ).toFixed(2)}
                         sx={{ gridColumn: { sm: "span 4", md: "span 1" } }}
                       />
+                      <Box
+                        sx={{
+                          gridColumn: "span 4",
+                          border: `1px dashed ${theme.colors.borderGray}`,
+                          borderRadius: "5px",
+                          padding: "1rem",
+                        }}
+                      >
+                        <Dropzone
+                          acceptedFiles=".jpg,.jpeg,.png"
+                          multiple={false}
+                          onDrop={(acceptedFiles) => {
+                            // Filter out files with other extensions
+                            const validFiles = acceptedFiles.filter(
+                              (file) =>
+                                file.type === "image/jpeg" ||
+                                file.type === "image/jpg" ||
+                                file.type === "image/png"
+                            );
+
+                            // Update the state with the first valid file, if any
+                            if (validFiles.length > 0) {
+                              setFieldValue("image", validFiles[0]);
+                            }
+                          }}
+                        >
+                          {({ getRootProps, getInputProps }) => (
+                            <Box
+                              {...getRootProps()}
+                              border="2px dashed black"
+                              p="1rem"
+                              sx={{ ":hover": { cursor: "pointer" } }}
+                            >
+                              <input {...getInputProps()} />
+                              {!values.image ? (
+                                "Insert Picture here (3:2 ratio preferred) "
+                              ) : (
+                                <Box
+                                  display="flex"
+                                  alignItems="center"
+                                  justifyContent="space-between"
+                                >
+                                  <Typography display="inline">
+                                    {values.image.name}
+                                  </Typography>
+                                  <ModeEditOutlineIcon />
+                                </Box>
+                              )}
+                            </Box>
+                          )}
+                        </Dropzone>
+                      </Box>
                       <PrimaryButton
                         invert={true}
                         fullWidth={true}

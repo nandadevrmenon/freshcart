@@ -56,6 +56,15 @@ const siteSlice = createSlice({
         return item;
       });
     },
+    addnewItem: (state, action) => {
+      const newItem = action.payload.item;
+      state.items.push(newItem);
+    },
+    deleteShopItem: (state, action) => {
+      state.items = state.items.filter((item) => {
+        return item._id !== action.payload.itemId;
+      });
+    },
   },
 });
 
@@ -66,6 +75,8 @@ export const {
   setShopLogin,
   updateCartShop,
   updateShopItem,
+  addnewItem,
+  deleteShopItem,
 } = siteSlice.actions;
 
 export default siteSlice.reducer;

@@ -7,7 +7,7 @@ import PrimaryButton from "components/PrimaryButton";
 import { useDispatch, useSelector } from "react-redux";
 import DangerButton from "components/DangerButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { updateShopItem } from "state/site";
+import { updateShopItem, deleteShopItem } from "state/site";
 
 const itemSchema = yup.object().shape({
   name: yup.string().required("Required"),
@@ -48,9 +48,28 @@ const EditItemForm = (props) => {
     props.changeItemInForm(null);
   };
 
-  const promptDeletionModal = () => {};
+  const promptDeletionModal = async () => {
+    const deleteItem = await fetch(
+      `http://localhost:3001/protected/${shop._id}/${item._id}/deleteitem`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${shopToken}`,
+        },
+      }
+    );
+    const deletedItem = await deleteItem.json();
+    cancelUpdateHandler();
+    dispatch(
+      deleteShopItem({
+        itemId: deletedItem._id,
+      })
+    );
+  };
 
   const updateItem = async (values, onSubmitProps) => {
+    values.price = values.price.toFixed(2);
     const changesInItem = {};
     for (const [key, value] of Object.entries(values)) {
       if (value !== item[key]) {

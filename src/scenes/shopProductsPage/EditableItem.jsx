@@ -5,6 +5,7 @@ import PrimaryButton from "components/PrimaryButton";
 
 const EditableItem = (props) => {
   const updateEditItemForm = () => {
+    // window.screenTop();
     props.changeItemInForm(props.item);
   };
   return (

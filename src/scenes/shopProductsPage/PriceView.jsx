@@ -4,7 +4,7 @@ import theme from "theme";
 
 const PriceView = (props) => {
   const { price, discount } = props;
-  const reducedPrice = price - ((price * discount) / 100.0).toFixed(2);
+  const reducedPrice = (price - (price * discount) / 100.0).toFixed(2);
   return (
     <React.Fragment>
       <Typography

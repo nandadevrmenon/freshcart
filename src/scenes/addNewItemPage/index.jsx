@@ -4,9 +4,11 @@ import * as yup from "yup";
 import theme from "theme";
 import PrimaryButton from "components/PrimaryButton";
 import DangerButton from "components/DangerButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Dropzone from "react-dropzone";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import { useNavigate } from "react-router-dom";
+import { addnewItem } from "state/site";
 
 const itemSchema = yup.object().shape({
   name: yup.string().required("Required"),
@@ -43,7 +45,12 @@ const AddNewItemPage = (props) => {
   });
   const shopName = shop.name;
   const shopId = shop._id;
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleFormSubmit = async (values, onSubmitProps) => {
+    values.price = values.price.toFixed(2);
     const formData = new FormData();
     for (let value in values) {
       formData.append(value, values[value]);
@@ -62,8 +69,13 @@ const AddNewItemPage = (props) => {
     );
 
     const savedItem = await savedItemResponse.json();
-    console.log(savedItem);
+    dispatch(addnewItem({ item: savedItem }));
     onSubmitProps.resetForm();
+    backToProducts();
+  };
+
+  const backToProducts = () => {
+    navigate(`/protected/${shopId}/products`);
   };
 
   return (
@@ -235,11 +247,15 @@ const AddNewItemPage = (props) => {
                         fullWidth={true}
                         type="submit"
                       >
-                        Update Item
+                        Add Item
                       </PrimaryButton>
 
-                      <DangerButton invert={true} fullWidth={true}>
-                        Cancel Update
+                      <DangerButton
+                        onClick={backToProducts}
+                        invert={true}
+                        fullWidth={true}
+                      >
+                        Cancel
                       </DangerButton>
                     </Box>
                   </Box>

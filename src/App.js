@@ -15,6 +15,7 @@ import NoAccess from "scenes/NoAccessPage";
 import UserCart from "scenes/userCart";
 import ShopProductsPage from "scenes/shopProductsPage";
 import AddNewItemPage from "scenes/addNewItemPage";
+import ManageShopPage from "scenes/manageShopPage";
 
 function App() {
   const isShop = useSelector((state) => {
@@ -91,6 +92,10 @@ function App() {
                 <Route
                   path="/protected/:id/addnewitem"
                   element={<AddNewItemPage />}
+                ></Route>
+                <Route
+                  path="/protected/:id/manageShop"
+                  element={<ManageShopPage />}
                 ></Route>
               </React.Fragment>
             ) : (

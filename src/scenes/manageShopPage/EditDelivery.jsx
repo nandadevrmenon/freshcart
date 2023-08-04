@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 
-const EditShopPage = (props) => {
+const EditDelivery = (props) => {
   return <Box></Box>;
 };
 
-export default EditShopPage;
+export default EditDelivery;

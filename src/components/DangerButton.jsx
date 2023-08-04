@@ -18,6 +18,7 @@ const DangerButton = (props) => {
           },
           fontFamily: "League Spartan",
         },
+        { ...props.sx },
       ]}
       variant="contained"
     >

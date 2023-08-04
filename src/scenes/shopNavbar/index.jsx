@@ -33,8 +33,8 @@ const ShopNavbar = () => {
   const goToProductsPage = () => {
     navigate(`/protected/${userId}/products`);
   };
-  const goToShopEditPage = () => {
-    navigate(`/protected/${userId}/editshop`);
+  const goToManageShopPage = () => {
+    navigate(`/protected/${userId}/manageShop`);
   };
 
   return (
@@ -122,9 +122,9 @@ const ShopNavbar = () => {
                   fontFamily="Poppins"
                   variant="h6"
                   sx={{ textTransform: "initial !important" }}
-                  onClick={goToShopEditPage}
+                  onClick={goToManageShopPage}
                 >
-                  Edit Shop
+                  Manage Shop
                 </Typography>
               </Button>
             </Box>

@@ -23,6 +23,7 @@ const PrimaryButton = (props) => {
           },
           fontFamily: "League Spartan",
         },
+        { ...props.sx },
       ]}
       variant="contained"
     >

@@ -65,6 +65,28 @@ const siteSlice = createSlice({
         return item._id !== action.payload.itemId;
       });
     },
+    setShopName: (state, action) => {
+      state.shop.name = action.payload.name;
+    },
+    setShopAddress: (state, action) => {
+      state.shop.address = action.payload.address;
+    },
+    setShopDelivery: (state, action) => {
+      const { cnc, ndd, delivery } = action.payload;
+      if (cnc || ndd || delivery) {
+        state.shop.cnc = cnc;
+        state.shop.ndd = ndd;
+        state.shop.delivery = delivery;
+      }
+    },
+    setShopCategories: (state, action) => {
+      state.shop.categories = action.payload.categories;
+    },
+    removeShopCategory: (state, action) => {
+      state.shop.categories = state.shop.categories.filter((cat) => {
+        return cat !== action.payload.category;
+      });
+    },
   },
 });
 
@@ -77,6 +99,11 @@ export const {
   updateShopItem,
   addnewItem,
   deleteShopItem,
+  setShopName,
+  setShopAddress,
+  setShopDelivery,
+  setShopCategories,
+  removeShopCategory,
 } = siteSlice.actions;
 
 export default siteSlice.reducer;

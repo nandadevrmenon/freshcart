@@ -6,6 +6,7 @@ import theme from "theme";
 import ShopNameField from "./components/ShopNameField";
 import EditCategories from "./EditCategories";
 import EditAddress from "./EditAddress";
+import EditDelivery from "./EditDelivery";
 
 const ManageShopPage = (props) => {
   const shop = useSelector((state) => {
@@ -40,6 +41,7 @@ const ManageShopPage = (props) => {
       ></ShopNameField>
       <EditAddress />
       <EditCategories />
+      <EditDelivery />
     </Box>
   );
 };

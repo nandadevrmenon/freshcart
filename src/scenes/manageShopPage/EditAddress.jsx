@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Box, Typography, TextField, MenuItem } from "@mui/material";
@@ -8,6 +8,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import PrimaryButton from "components/PrimaryButton";
 import DangerButton from "components/DangerButton";
 import theme from "theme";
+import { setShopAddress } from "state/site";
+import { AdbRounded } from "@mui/icons-material";
 
 const validationSchema = yup.object().shape({
   address0: yup
@@ -35,6 +37,13 @@ const EditAddress = (props) => {
   const address = useSelector((state) => {
     return state.shop.address;
   });
+  const shopId = useSelector((state) => {
+    return state.shop._id;
+  });
+  const shopToken = useSelector((state) => {
+    return state.token;
+  });
+
   const initialValues = {
     address0: address[0],
     address1: address[1],
@@ -54,7 +63,27 @@ const EditAddress = (props) => {
     resetForm();
   };
 
-  const handleFormSubmit = () => {};
+  const dispatch = useDispatch();
+  const handleFormSubmit = async (values, onSubmitProps) => {
+    const address = [values.address0, values.address1, values.address2];
+    const response = await fetch(
+      `http://localhost:3001/protected/${shopId}/updateshopdetails`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: shopToken,
+        },
+        body: JSON.stringify({ address: address }),
+      }
+    );
+    const responseJSON = await response.json();
+    const newAddress = responseJSON.address;
+    if (newAddress) {
+      dispatch(setShopAddress({ address: address }));
+      setIsInEditMode(false);
+    }
+  };
 
   return (
     <Formik
@@ -91,7 +120,11 @@ const EditAddress = (props) => {
               </Typography>
               {isInEditMode ? (
                 <Box>
-                  <PrimaryButton sx={{ marginX: "2rem" }} invert={true}>
+                  <PrimaryButton
+                    sx={{ marginX: "2rem" }}
+                    invert={true}
+                    type="submit"
+                  >
                     Update
                   </PrimaryButton>
                   <DangerButton

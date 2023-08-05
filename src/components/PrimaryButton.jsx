@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 const PrimaryButton = (props) => {
   return (
     <Button
+      disabled={props.disabled}
       fullWidth={props.fullWidth}
       type={props.type}
       onClick={props.onClick}

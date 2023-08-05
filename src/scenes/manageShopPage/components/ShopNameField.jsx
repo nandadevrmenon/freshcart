@@ -6,16 +6,25 @@ import theme from "theme";
 import * as yup from "yup";
 import PrimaryButton from "components/PrimaryButton";
 import DangerButton from "components/DangerButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setShopName } from "state/site";
+
+const fieldSchema = yup
+  .object()
+  .shape({ name: yup.string().required("Required") });
 
 const ShopNameField = () => {
   const [isInEditMode, setIsInEditMode] = useState(false);
   const shopName = useSelector((state) => {
     return state.shop.name;
   });
-  const fieldSchema = yup
-    .object()
-    .shape({ name: yup.string().required("Required") });
+  const shopId = useSelector((state) => {
+    return state.shop._id;
+  });
+  const shopToken = useSelector((state) => {
+    return state.token;
+  });
+
   const initialFieldValue = { name: shopName };
 
   const changeEditModeHandler = () => {
@@ -30,7 +39,26 @@ const ShopNameField = () => {
     resetForm();
   };
 
-  const handleFormSubmit = () => {};
+  const dispatch = useDispatch();
+  const handleFormSubmit = async (values, onSubmitProps) => {
+    const response = await fetch(
+      `http://localhost:3001/protected/${shopId}/updateshopdetails`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: shopToken,
+        },
+        body: JSON.stringify(values),
+      }
+    );
+    const responseJSON = await response.json();
+    const newName = responseJSON.name;
+    if (newName) {
+      dispatch(setShopName({ name: newName }));
+      setIsInEditMode(false);
+    }
+  };
   return (
     <Box
       display="grid"
@@ -53,6 +81,7 @@ const ShopNameField = () => {
           initialValues={initialFieldValue}
           validationSchema={fieldSchema}
           onSubmit={handleFormSubmit}
+          enableReinitialize={true}
         >
           {({
             values,
@@ -86,7 +115,11 @@ const ShopNameField = () => {
                   />
                   {isInEditMode ? (
                     <>
-                      <PrimaryButton sx={{ marginX: "2rem" }} invert={true}>
+                      <PrimaryButton
+                        sx={{ marginX: "2rem" }}
+                        invert={true}
+                        type="submit"
+                      >
                         Update
                       </PrimaryButton>
                       <DangerButton

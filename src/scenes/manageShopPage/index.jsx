@@ -3,9 +3,9 @@ import PrimaryButton from "components/PrimaryButton";
 import { useSelector } from "react-redux";
 import * as yup from "yup";
 import theme from "theme";
-import ShopField from "./components/ShopField";
-import AreaDropdown from "./components/AreaDropdown";
+import ShopNameField from "./components/ShopNameField";
 import EditCategories from "./EditCategories";
+import EditAddress from "./EditAddress";
 
 const ManageShopPage = (props) => {
   const shop = useSelector((state) => {
@@ -32,32 +32,14 @@ const ManageShopPage = (props) => {
           <PrimaryButton invert={true}>Add new Item</PrimaryButton>
         </Box>
       </Box>
-      <ShopField
+      <ShopNameField
         label="Shop Name"
         name={"name"}
         initialValue={shop.name}
         schema={{ name: yup.string().required("Required") }}
-      ></ShopField>
-      <ShopField
-        label="Address"
-        name={"address0"}
-        initialValue={shop.address[0]}
-        schema={{ address0: yup.string().required("Required") }}
-      ></ShopField>
-      <ShopField
-        label="PostCode"
-        name={"address1"}
-        initialValue={shop.address[1]}
-        schema={{ address1: yup.string().required("Required") }}
-      ></ShopField>
-
-      <AreaDropdown
-        name={"address2"}
-        label="Area"
-        initialValue={shop.address[2]}
-        schema={{ address1: yup.string().required("Required") }}
-      />
-      <EditCategories></EditCategories>
+      ></ShopNameField>
+      <EditAddress />
+      <EditCategories />
     </Box>
   );
 };

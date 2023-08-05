@@ -6,16 +6,17 @@ import theme from "theme";
 import * as yup from "yup";
 import PrimaryButton from "components/PrimaryButton";
 import DangerButton from "components/DangerButton";
+import { useSelector } from "react-redux";
 
-const ShopField = (props) => {
-  // label="Address"
-  // name={"address0"}
-  // initialValue={shop.address[0]}
-  // schema={yup.string().required("Required")}
+const ShopNameField = () => {
   const [isInEditMode, setIsInEditMode] = useState(false);
-  const fieldSchema = yup.object().shape(props.schema);
-  const initialFieldValue = {};
-  initialFieldValue[props.name] = props.initialValue;
+  const shopName = useSelector((state) => {
+    return state.shop.name;
+  });
+  const fieldSchema = yup
+    .object()
+    .shape({ name: yup.string().required("Required") });
+  const initialFieldValue = { name: shopName };
 
   const changeEditModeHandler = () => {
     setIsInEditMode((prev) => {
@@ -45,7 +46,7 @@ const ShopField = (props) => {
         sx={{ gridColumn: { sm: "span 3", md: "1/2" } }}
         marginY="auto"
       >
-        {props.label}
+        Shop Name
       </Typography>
       <Box sx={{ gridColumn: { sm: "0", md: "2/4" } }}>
         <Formik
@@ -78,10 +79,10 @@ const ShopField = (props) => {
                     disabled={!isInEditMode}
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    value={values[props.name]}
-                    name={props.name}
-                    error={Boolean(errors[props.name])}
-                    helperText={errors[props.name]}
+                    value={values.name}
+                    name="name"
+                    error={Boolean(errors.name)}
+                    helperText={errors.name}
                   />
                   {isInEditMode ? (
                     <>
@@ -113,4 +114,4 @@ const ShopField = (props) => {
   );
 };
 
-export default ShopField;
+export default ShopNameField;

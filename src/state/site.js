@@ -87,6 +87,12 @@ const siteSlice = createSlice({
         return cat !== action.payload.category;
       });
     },
+    setShopEmail: (state, action) => {
+      state.shop.email = action.payload.email;
+    },
+    setShopPhone: (state, action) => {
+      state.shop.phone = action.payload.phone;
+    },
   },
 });
 
@@ -104,6 +110,8 @@ export const {
   setShopDelivery,
   setShopCategories,
   removeShopCategory,
+  setShopEmail,
+  setShopPhone,
 } = siteSlice.actions;
 
 export default siteSlice.reducer;

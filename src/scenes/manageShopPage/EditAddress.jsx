@@ -9,7 +9,6 @@ import PrimaryButton from "components/PrimaryButton";
 import DangerButton from "components/DangerButton";
 import theme from "theme";
 import { setShopAddress } from "state/site";
-import { AdbRounded } from "@mui/icons-material";
 
 const validationSchema = yup.object().shape({
   address0: yup

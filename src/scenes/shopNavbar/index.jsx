@@ -17,12 +17,12 @@ import { setLogout } from "state/site";
 const ShopNavbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userId = useSelector((state) => {
+  const shopId = useSelector((state) => {
     return state.shop._id;
   });
 
   const navigateToAdminHome = () => {
-    navigate(`/protected/${userId}/home`);
+    navigate(`/protected/${shopId}/home`);
   };
 
   const signOut = () => {
@@ -31,10 +31,13 @@ const ShopNavbar = () => {
   };
 
   const goToProductsPage = () => {
-    navigate(`/protected/${userId}/products`);
+    navigate(`/protected/${shopId}/products`);
   };
   const goToManageShopPage = () => {
-    navigate(`/protected/${userId}/manageShop`);
+    navigate(`/protected/${shopId}/manageShop`);
+  };
+  const goToProfilePage = () => {
+    navigate(`/protected/${shopId}/profile`);
   };
 
   return (
@@ -128,6 +131,20 @@ const ShopNavbar = () => {
                 </Typography>
               </Button>
             </Box>
+            <Box display="flex" alignItems="center">
+              <IconButton
+                aria-label="chat"
+                style={{
+                  border: "none",
+                  outline: "none",
+                }}
+                onClick={goToProfilePage}
+              >
+                <AccountCircleIcon
+                  sx={{ fontSize: "40px", color: theme.colors.white }}
+                />
+              </IconButton>
+            </Box>
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Button
                 onClick={signOut}
@@ -146,19 +163,6 @@ const ShopNavbar = () => {
                   Sign Out
                 </Typography>
               </Button>
-            </Box>
-            <Box display="flex" alignItems="center">
-              <IconButton
-                aria-label="chat"
-                style={{
-                  border: "none",
-                  outline: "none",
-                }}
-              >
-                <AccountCircleIcon
-                  sx={{ fontSize: "40px", color: theme.colors.white }}
-                />
-              </IconButton>
             </Box>
           </Box>
         </Toolbar>

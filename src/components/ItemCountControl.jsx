@@ -96,17 +96,17 @@ const ItemCountControl = (props) => {
       <Collapse in={ItemCount > 0} unmountOnExit>
         <CardActions sx={{ margin: 0, padding: 0 }}>
           <Box display="flex" alignItems="center" minWidth="2rem">
-            <AddCircleIcon
+            <RemoveCircleIcon
               color="black"
-              onClick={increaseItemCount}
+              onClick={decreaseItemCount}
               sx={{ marginRight: "1.6rem", fontSize: "25px" }}
             />
             <Typography fontSize="18px" display="inline">
               {ItemCount}
             </Typography>
-            <RemoveCircleIcon
+            <AddCircleIcon
               color="black"
-              onClick={decreaseItemCount}
+              onClick={increaseItemCount}
               sx={{ marginLeft: "1.6rem", fontSize: "25px" }}
             />
           </Box>

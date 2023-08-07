@@ -95,6 +95,12 @@ const UserCart = () => {
             flexDirection="column"
             alignItems="center"
             justifyContent="start"
+            maxHeight="70vh"
+            overflow="scroll"
+            sx={{
+              overflowX: "hidden",
+              borderBottom: `1px solid ${theme.colors.borderGray}`,
+            }}
           >
             {cartItems.map((item) => {
               return (
@@ -121,7 +127,7 @@ const UserCart = () => {
           margin="normal"
         />
         <Typography variant="h6" gutterBottom>
-          Subtotal:€{cartTotal}
+          Subtotal:€{cartTotal.toFixed(2)}
         </Typography>
         <Typography variant="h6" gutterBottom>
           Delivery and Handling: €3.49

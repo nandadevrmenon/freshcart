@@ -64,7 +64,6 @@ const CartItem = (props) => {
   return (
     <Box
       display={show ? "flex" : "none"}
-      overflow="hidden"
       width="90%"
       marginX="auto"
       flexDirection="row"
@@ -114,17 +113,17 @@ const CartItem = (props) => {
           />
           <CardActions sx={{ margin: 0, padding: 0 }}>
             <Box display="flex" alignItems="center" minWidth="2rem">
-              <AddCircleIcon
+              <RemoveCircleIcon
                 color="black"
-                onClick={increaseItemCount}
+                onClick={decreaseItemCount}
                 sx={{ marginRight: "1.6rem", fontSize: "25px" }}
               />
               <Typography fontSize="18px" display="inline">
                 {ItemCount}
               </Typography>
-              <RemoveCircleIcon
+              <AddCircleIcon
                 color="black"
-                onClick={decreaseItemCount}
+                onClick={increaseItemCount}
                 sx={{ marginLeft: "1.6rem", fontSize: "25px" }}
               />
             </Box>

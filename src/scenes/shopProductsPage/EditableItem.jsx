@@ -5,7 +5,7 @@ import PrimaryButton from "components/PrimaryButton";
 
 const EditableItem = (props) => {
   const updateEditItemForm = () => {
-    // window.screenTop();
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     props.changeItemInForm(props.item);
   };
   return (

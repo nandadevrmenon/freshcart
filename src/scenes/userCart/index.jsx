@@ -8,6 +8,7 @@ import CartItem from "./CartItem";
 
 const UserCart = () => {
   const localCart = useSelector((state) => state.cart);
+  // const cartShopId = useSelector((state)=>{return state.})
   const [cartItems, setCartItems] = useState([]);
   const isInitialRender = useRef(true);
 
@@ -27,6 +28,11 @@ const UserCart = () => {
           console.log("Error fetching details: ", error);
         }
       };
+      // const fetchShopDeliveryOptions = async()=>{
+      //   try{
+      //     const response = await fetch("http://localhost:3001/shop/checkdeliveryoptions",{metho:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify()})
+      //   }
+      // }
 
       fetchItemsInCart();
     } else {
@@ -95,6 +101,12 @@ const UserCart = () => {
             flexDirection="column"
             alignItems="center"
             justifyContent="start"
+            maxHeight="70vh"
+            overflow="scroll"
+            sx={{
+              overflowX: "hidden",
+              borderBottom: `1px solid ${theme.colors.borderGray}`,
+            }}
           >
             {cartItems.map((item) => {
               return (
@@ -121,7 +133,7 @@ const UserCart = () => {
           margin="normal"
         />
         <Typography variant="h6" gutterBottom>
-          Subtotal:€{cartTotal}
+          Subtotal:€{cartTotal.toFixed(2)}
         </Typography>
         <Typography variant="h6" gutterBottom>
           Delivery and Handling: €3.49

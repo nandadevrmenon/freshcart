@@ -46,6 +46,10 @@ const NavBar = () => {
     navigate(`/cart/${userID}`);
   };
 
+  const goToUserProfile = () => {
+    navigate(`profile/${userID}`);
+  };
+
   const promptLogin = () => {};
 
   return (
@@ -148,6 +152,7 @@ const NavBar = () => {
                   fontWeight: "bold",
                   color: "#fff",
                 }}
+                onClick={goToUserProfile}
               >
                 <Typography
                   fontFamily="Poppins"
@@ -158,7 +163,25 @@ const NavBar = () => {
                 </Typography>
               </Button>
             </Box>
-            {isLoggedIn && (
+
+            <Box display="flex" alignItems="center">
+              <IconButton
+                onClick={isLoggedIn ? goToCart : promptLogin}
+                aria-label="chat"
+                style={{
+                  border: "none",
+                  outline: "none",
+                }}
+              >
+                <Badge
+                  badgeContent={Object.keys(cart).length}
+                  sx={{ color: theme.colors.white }}
+                >
+                  <LocalMallIcon sx={{ color: theme.colors.white }} />
+                </Badge>
+              </IconButton>
+            </Box>
+            {/* {isLoggedIn && (
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
                 <Button
                   onClick={signOut}
@@ -178,25 +201,7 @@ const NavBar = () => {
                   </Typography>
                 </Button>
               </Box>
-            )}
-
-            <Box display="flex" alignItems="center">
-              <IconButton
-                onClick={isLoggedIn ? goToCart : promptLogin}
-                aria-label="chat"
-                style={{
-                  border: "none",
-                  outline: "none",
-                }}
-              >
-                <Badge
-                  badgeContent={Object.keys(cart).length}
-                  sx={{ color: theme.colors.white }}
-                >
-                  <LocalMallIcon sx={{ color: theme.colors.white }} />
-                </Badge>
-              </IconButton>
-            </Box>
+            )} */}
           </Box>
         </Toolbar>
       </Container>

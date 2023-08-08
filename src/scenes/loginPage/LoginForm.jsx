@@ -112,6 +112,7 @@ const LoginForm = () => {
             user: loggedIn.user,
             token: loggedIn.token,
             cart: loggedIn.user.cart,
+            cartShop: loggedIn.cartShop,
           })
         );
         navigate("/");

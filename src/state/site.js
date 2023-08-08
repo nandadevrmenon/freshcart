@@ -93,6 +93,19 @@ const siteSlice = createSlice({
     setShopPhone: (state, action) => {
       state.shop.phone = action.payload.phone;
     },
+    setUserName: (state, action) => {
+      state.user.firstName = action.payload.firstName;
+      state.user.lastName = action.payload.lastName;
+    },
+    setUserPhone: (state, action) => {
+      state.user.phone = action.payload.phone;
+    },
+    setUserAddress: (state, action) => {
+      state.user.address = action.payload.address;
+    },
+    setUserEmail: (state, action) => {
+      state.user.email = action.payload.email;
+    },
   },
 });
 
@@ -112,6 +125,10 @@ export const {
   removeShopCategory,
   setShopEmail,
   setShopPhone,
+  setUserAddress,
+  setUserEmail,
+  setUserName,
+  setUserPhone,
 } = siteSlice.actions;
 
 export default siteSlice.reducer;

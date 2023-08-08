@@ -8,7 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import PrimaryButton from "components/PrimaryButton";
 import DangerButton from "components/DangerButton";
 import theme from "theme";
-import { setShopAddress } from "state/site";
+import { setShopAddress, setUserAddress } from "state/site";
 
 const validationSchema = yup.object().shape({
   address0: yup
@@ -33,13 +33,14 @@ for (let i = 1; i < 25; i++) {
 }
 
 const EditAddress = (props) => {
+  const { isShop } = props;
   const address = useSelector((state) => {
-    return state.shop.address;
+    return isShop ? state.shop.address : state.user.address;
   });
-  const shopId = useSelector((state) => {
-    return state.shop._id;
+  const userId = useSelector((state) => {
+    return isShop ? state.shop._id : state.user._id;
   });
-  const shopToken = useSelector((state) => {
+  const token = useSelector((state) => {
     return state.token;
   });
 
@@ -66,12 +67,14 @@ const EditAddress = (props) => {
   const handleFormSubmit = async (values, onSubmitProps) => {
     const address = [values.address0, values.address1, values.address2];
     const response = await fetch(
-      `http://localhost:3001/protected/${shopId}/updateshopdetails`,
+      isShop
+        ? `http://localhost:3001/protected/${userId}/updateshopdetails`
+        : `http://localhost:3001/users/${userId}/updateuserinfo`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: shopToken,
+          Authorization: token,
         },
         body: JSON.stringify({ address: address }),
       }
@@ -79,7 +82,7 @@ const EditAddress = (props) => {
     const responseJSON = await response.json();
     const newAddress = responseJSON.address;
     if (newAddress) {
-      dispatch(setShopAddress({ address: address }));
+      dispatch(setUserAddress({ address: address }));
       setIsInEditMode(false);
     }
   };
@@ -115,7 +118,7 @@ const EditAddress = (props) => {
                 color={theme.colors.siteDarkGreen}
                 display="inline"
               >
-                Shop Address
+                {isShop ? "Shop Address" : "Your Delivery Address"}
               </Typography>
               {isInEditMode ? (
                 <Box>
@@ -160,7 +163,6 @@ const EditAddress = (props) => {
                 Address
               </Typography>
               <TextField
-                id="outlined-size-small"
                 size="small"
                 sx={{
                   width: "100%",
@@ -187,7 +189,6 @@ const EditAddress = (props) => {
                 Postcode
               </Typography>
               <TextField
-                id="outlined-size-small"
                 size="small"
                 sx={{
                   width: "100%",

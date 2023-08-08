@@ -1,11 +1,11 @@
-import { Box, Typography, TextField } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import PrimaryButton from "components/PrimaryButton";
 import { useSelector } from "react-redux";
 import * as yup from "yup";
 import theme from "theme";
 import ShopNameField from "./components/ShopNameField";
 import EditCategories from "./EditCategories";
-import EditAddress from "./EditAddress";
+import EditAddress from "../../components/EditAddress";
 import EditDelivery from "./EditDelivery";
 
 const ManageShopPage = (props) => {
@@ -39,7 +39,7 @@ const ManageShopPage = (props) => {
         initialValue={shop.name}
         schema={{ name: yup.string().required("Required") }}
       ></ShopNameField>
-      <EditAddress />
+      <EditAddress isShop={true} />
       <EditCategories />
       <EditDelivery />
     </Box>

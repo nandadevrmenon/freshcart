@@ -1,19 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 import DangerButton from "components/DangerButton";
 import theme from "theme";
 import ShopEmailEditor from "./ShopEmailEditor";
 import ShopPhoneEditor from "./ShopPhoneEditor";
-import ShopPasswordEditor from "./ShopPasswordEditor";
+import PasswordEditor from "components/PasswordEditor";
 
 const ShopProfilePage = (props) => {
-  const [isInEditPasswordMode, setIsInEditPasswordMode] = useState(false);
   const [isShowingDeleteModal, setIsShowingDeleteModal] = useState(false);
-  const shop = useSelector((state) => {
-    return state.shop;
-  });
 
   return (
     <Box
@@ -35,20 +30,11 @@ const ShopProfilePage = (props) => {
           <ShopEmailEditor></ShopEmailEditor>
           <ShopPhoneEditor></ShopPhoneEditor>
           <Box width="60%" marginX="auto">
-            {isInEditPasswordMode ? (
-              <ShopPasswordEditor
-                setIsInEditPasswordMode={setIsInEditPasswordMode}
-              ></ShopPasswordEditor>
-            ) : (
-              <DangerButton
-                sx={{ marginBottom: "2rem" }}
-                onClick={() => setIsInEditPasswordMode(true)}
-              >
-                Change Password
-              </DangerButton>
-            )}
+            <PasswordEditor isShop={true}></PasswordEditor>
             <br />
-            <DangerButton>Delete Account</DangerButton>
+            <DangerButton sx={{ marginTop: "2rem" }}>
+              Delete Account
+            </DangerButton>
           </Box>
         </Box>
       </Box>

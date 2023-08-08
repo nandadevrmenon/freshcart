@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { Typography, TextField } from "@mui/material";
 import { Formik } from "formik";
 import theme from "theme";
@@ -28,13 +29,15 @@ const initialFieldValues = {
   confirmNewPassword: "",
 };
 
-const ShopPasswordEditor = (props) => {
-  const shopId = useSelector((state) => {
-    return state.shop._id;
+const PasswordEditor = (props) => {
+  const { isShop } = props;
+  const userId = useSelector((state) => {
+    return isShop ? state.shop._id : state.user._id;
   });
   const shopToken = useSelector((state) => {
     return state.token;
   });
+  const [isInEditPasswordMode, setIsInEditPasswordMode] = useState(false);
 
   const handleFormSubmit = async (values, onSubmitProps) => {
     if (values.newPassword !== values.confirmNewPassword) {
@@ -43,7 +46,9 @@ const ShopPasswordEditor = (props) => {
       });
     } else {
       const response = await fetch(
-        `http://localhost:3001/protected/${shopId}/changeshoppassword`,
+        isShop
+          ? `http://localhost:3001/protected/${userId}/changeshoppassword`
+          : `http://localhost:3001/users/${userId}/updateUserPassword`,
         {
           method: "POST",
           headers: {
@@ -56,16 +61,23 @@ const ShopPasswordEditor = (props) => {
       const responseJson = await response.json();
       if (responseJson.msg === "Invalid password") {
         onSubmitProps.setErrors({
-          oldPassword: "Passwords is incorrect",
+          oldPassword: "Password is incorrect",
         });
         onSubmitProps.setSubmitting(false);
       } else {
         onSubmitProps.resetForm();
-        props.setIsInEditPasswordMode(false);
+        setIsInEditPasswordMode(false);
       }
     }
   };
 
+  if (!isInEditPasswordMode) {
+    return (
+      <DangerButton onClick={() => setIsInEditPasswordMode(true)}>
+        Change Password
+      </DangerButton>
+    );
+  }
   return (
     <React.Fragment>
       <Formik
@@ -141,7 +153,7 @@ const ShopPasswordEditor = (props) => {
               </PrimaryButton>
               <DangerButton
                 onClick={() => {
-                  props.setIsInEditPasswordMode(false);
+                  setIsInEditPasswordMode(false);
                 }}
               >
                 Cancel
@@ -154,4 +166,4 @@ const ShopPasswordEditor = (props) => {
   );
 };
 
-export default ShopPasswordEditor;
+export default PasswordEditor;

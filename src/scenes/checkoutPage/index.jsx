@@ -1,7 +1,7 @@
+import { Box } from "@mui/material";
 
-const CheckoutPage = ()=>{
-  return(<div>asdjabsdasdcheckout  Pgae</div>);
-}
-
+const CheckoutPage = () => {
+  return <Box paddingTop="5rem">asdjabsdasdcheckout Pgae</Box>;
+};
 
 export default CheckoutPage;

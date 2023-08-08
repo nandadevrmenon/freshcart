@@ -8,6 +8,7 @@ import CartItem from "./CartItem";
 
 const UserCart = () => {
   const localCart = useSelector((state) => state.cart);
+  // const cartShopId = useSelector((state)=>{return state.})
   const [cartItems, setCartItems] = useState([]);
   const isInitialRender = useRef(true);
 
@@ -27,6 +28,11 @@ const UserCart = () => {
           console.log("Error fetching details: ", error);
         }
       };
+      // const fetchShopDeliveryOptions = async()=>{
+      //   try{
+      //     const response = await fetch("http://localhost:3001/shop/checkdeliveryoptions",{metho:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify()})
+      //   }
+      // }
 
       fetchItemsInCart();
     } else {

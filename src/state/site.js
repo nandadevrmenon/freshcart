@@ -32,7 +32,7 @@ const siteSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.cart = action.payload.cart;
-      state.cartShop = action.payload.user.cartShop;
+      state.cartShop = action.payload.cartShop;
     },
     setLogout: (state) => {
       state.user = null;

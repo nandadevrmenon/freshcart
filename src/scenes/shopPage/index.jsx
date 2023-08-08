@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import theme from "theme";
 import ItemTabs from "./ItemTabs";
 import ShopInfoBar from "./ShopInfoBar";
+import shopCarouselContent from "./shopCarouselContent";
+
 
 const ShopPage = (props) => {
   const { id } = useParams();
@@ -63,8 +65,10 @@ const ShopPage = (props) => {
   // }
 
   return (
-    <Box paddingTop="5rem" width="100%" height="auto">
-      <Box marginX="auto" width="80vw" height={"100vh"}>
+    <Box width="100%" height="auto">
+      <Box marginX="auto" width="100vw" height={"100vh"}>
+        {shopCarouselContent()}
+      
         <Box
           display="flex"
           flexDirection="row"
@@ -72,6 +76,7 @@ const ShopPage = (props) => {
           alignItems="centre"
           justifyContent="space-between"
           paddingY="1rem"
+          paddingTop="5rem"
         >
           <ShopInfoBar shop={shop}></ShopInfoBar>
           <Paper

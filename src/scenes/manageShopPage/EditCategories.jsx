@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { Formik } from "formik";
 import theme from "theme";
 import CategoryBox from "./components/CategoryBox";
-import PrimaryButton from "components/PrimaryButton";
+import PrimaryButton from "components/buttons/PrimaryButton";
 import { setShopCategories } from "state/site";
 
 const initialValues = { category: "" };

@@ -2,14 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { Box, Typography, TextField } from "@mui/material";
 import { useSelector } from "react-redux";
-import PrimaryButton from "components/PrimaryButton";
+import PrimaryButton from "components/buttons/PrimaryButton";
 import theme from "theme";
 import CartItem from "./CartItem";
+import { useNavigate } from "react-router-dom";
 
 const UserCart = () => {
   const localCart = useSelector((state) => state.cart);
-  // const cartShopId = useSelector((state)=>{return state.})
+  const cartShopId = useSelector((state) => state.cartShop);
+  const [deliveryOptions, setDeliveryOptions] = useState({
+    cnc: false,
+    ndd: false,
+    deliver: false,
+  });
   const [cartItems, setCartItems] = useState([]);
+
   const isInitialRender = useRef(true);
 
   useEffect(() => {
@@ -28,17 +35,36 @@ const UserCart = () => {
           console.log("Error fetching details: ", error);
         }
       };
-      // const fetchShopDeliveryOptions = async()=>{
-      //   try{
-      //     const response = await fetch("http://localhost:3001/shop/checkdeliveryoptions",{metho:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify()})
-      //   }
-      // }
+      const fetchShopDeliveryOptions = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:3001/shops/${cartShopId}/checkdeliveryoptions`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+            }
+          );
+          const options = await response.json();
+          setDeliveryOptions(options);
+        } catch (err) {
+          console.log("Error fetching Delivery Options:", err);
+        }
+      };
 
       fetchItemsInCart();
+      fetchShopDeliveryOptions();
     } else {
       return;
     }
   }, []);
+
+  const navigate = useNavigate();
+  const gotToCheckOutOrderPage = () => {
+    navigate("/checkout");
+  };
+  const goToCNCOrderPage = () => {
+    navigate("/clickncollect");
+  };
 
   const cartTotal = Object.values(cartItems).reduce((total, item) => {
     if (localCart[item._id]) {
@@ -52,25 +78,9 @@ const UserCart = () => {
     }
   }, 0);
 
+  const { cnc, delivery, ndd } = deliveryOptions;
+
   return (
-    // <Box sx={{ padding: 14 }}>
-    //   <Grid container spacing={4}>
-    //     <Grid item xs={12} md={8}>
-    //       <Typography variant="h4" gutterBottom>
-    //         Your Cart
-    //       </Typography>
-    //       {Object.keys(cart).map((itemId) => (
-    //         <CartItem key={itemId} item={cart[itemId]} />
-    //       ))}
-    //     </Grid>
-    //     <Grid item xs={12} md={4}>
-    //       <Typography variant="h4" gutterBottom>
-    //         Have a Promo Code?
-    //       </Typography>
-    //
-    //     </Grid>
-    //   </Grid>
-    // </Box>
     <Box
       paddingTop="5rem"
       mx="auto"
@@ -138,16 +148,28 @@ const UserCart = () => {
         <Typography variant="h6" gutterBottom>
           Delivery and Handling: €3.49
         </Typography>
-        <PrimaryButton
-          variant="contained"
-          color="primary"
-          size="large"
-          fullWidth
-          margin="normal"
-          invert={true}
-        >
-          Place Order
-        </PrimaryButton>
+        {(delivery || ndd) && (
+          <PrimaryButton
+            sx={{ marginBottom: "1rem" }}
+            fullWidth={true}
+            invert={true}
+            onClick={gotToCheckOutOrderPage}
+          >
+            Checkout
+          </PrimaryButton>
+        )}
+        {cnc && (
+          <>
+            <PrimaryButton
+              fullWidth={true}
+              invert={true}
+              onClick={goToCNCOrderPage}
+            >
+              Click n Collect
+            </PrimaryButton>
+          </>
+        )}
+
         <Box display="flex"></Box>
       </Box>
     </Box>

@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import theme from "theme";
-import ItemCard from "components/ItemCard/ItemCard";
+import ItemCard from "components/itemCard/ItemCard";
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";

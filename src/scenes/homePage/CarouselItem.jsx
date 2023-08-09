@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import PrimaryButton from "components/PrimaryButton";
+import PrimaryButton from "components/buttons/PrimaryButton";
 
 const CarouselItem = (props) => {
   return (

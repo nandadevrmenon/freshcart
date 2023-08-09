@@ -5,8 +5,8 @@ import * as yup from "yup";
 import { Formik } from "formik";
 import { Box, Typography, TextField, MenuItem } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import PrimaryButton from "components/PrimaryButton";
-import DangerButton from "components/DangerButton";
+import PrimaryButton from "components/buttons/PrimaryButton";
+import DangerButton from "components/buttons/DangerButton";
 import theme from "theme";
 import { setShopAddress, setUserAddress } from "state/site";
 
@@ -50,7 +50,7 @@ const EditAddress = (props) => {
     address2: address[2],
   };
 
-  const [isInEditMode, setIsInEditMode] = useState(false);
+  const [isInEditMode, setIsInEditMode] = useState(props.inEditMode);
   const changeEditModeHandler = () => {
     setIsInEditMode((prev) => {
       return !prev;

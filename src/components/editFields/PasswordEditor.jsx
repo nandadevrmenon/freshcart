@@ -4,8 +4,8 @@ import { Typography, TextField } from "@mui/material";
 import { Formik } from "formik";
 import theme from "theme";
 import * as yup from "yup";
-import PrimaryButton from "components/PrimaryButton";
-import DangerButton from "components/DangerButton";
+import PrimaryButton from "components/buttons/PrimaryButton";
+import DangerButton from "components/buttons/DangerButton";
 import { useSelector } from "react-redux";
 
 const passwordSchema = yup.object().shape({

@@ -1,11 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import PrimaryButton from "components/PrimaryButton";
+import PrimaryButton from "components/buttons/PrimaryButton";
 import { useSelector } from "react-redux";
 import * as yup from "yup";
 import theme from "theme";
 import ShopNameField from "./components/ShopNameField";
 import EditCategories from "./EditCategories";
-import EditAddress from "../../components/EditAddress";
+import EditAddress from "../../components/editFields/EditAddress";
 import EditDelivery from "./EditDelivery";
 
 const ManageShopPage = (props) => {

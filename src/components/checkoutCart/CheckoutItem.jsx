@@ -31,7 +31,7 @@ const CheckoutItem = ({ item, count }) => {
         <Typography
           variant="h6"
           color={
-            item.discount > 0 ? theme.colors.dangerRed : theme.colors.blackGreen
+            item.discount > 0 ? theme.colors.sitePink : theme.colors.blackGreen
           }
         >
           {discountedPrice}

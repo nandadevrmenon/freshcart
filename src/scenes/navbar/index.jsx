@@ -144,25 +144,27 @@ const NavBar = () => {
                 </Typography>
               </Button>
             </Box>
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <Button
-                sx={{
-                  flexGrow: 1,
-                  display: { xs: "none", md: "flex" },
-                  fontWeight: "bold",
-                  color: "#fff",
-                }}
-                onClick={goToUserProfile}
-              >
-                <Typography
-                  fontFamily="Poppins"
-                  variant="h6"
-                  sx={{ textTransform: "initial !important" }}
+            {isLoggedIn && (
+              <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                <Button
+                  sx={{
+                    flexGrow: 1,
+                    display: { xs: "none", md: "flex" },
+                    fontWeight: "bold",
+                    color: "#fff",
+                  }}
+                  onClick={goToUserProfile}
                 >
-                  Profile
-                </Typography>
-              </Button>
-            </Box>
+                  <Typography
+                    fontFamily="Poppins"
+                    variant="h6"
+                    sx={{ textTransform: "initial !important" }}
+                  >
+                    Profile
+                  </Typography>
+                </Button>
+              </Box>
+            )}
 
             <Box display="flex" alignItems="center">
               <IconButton

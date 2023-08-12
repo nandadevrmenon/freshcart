@@ -50,8 +50,26 @@ const CheckoutAddressView = ({ address, openAddressModalHandler }) => {
 
   return (
     <Box>
-      <Typography>No Address linked to Account </Typography>
-      <Typography>Add address here</Typography>
+      <Typography
+        variant="h5"
+        color={theme.colors.dangerRed}
+        fontFamily="Poppins"
+      >
+        No Delivery Address
+      </Typography>
+      <Typography
+        variant="body2"
+        color={theme.colors.darkGrey}
+        fontFamily="Poppins"
+        sx={{
+          textDecoration: "underline",
+          ":hover": { cursor: "pointer", color: theme.colors.blackGreen },
+        }}
+        display="block"
+        onClick={openAddressModalHandler}
+      >
+        Click here to Add Address
+      </Typography>
     </Box>
   );
 };

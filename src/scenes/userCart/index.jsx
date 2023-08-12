@@ -6,6 +6,7 @@ import PrimaryButton from "components/buttons/PrimaryButton";
 import theme from "theme";
 import CartItem from "./CartItem";
 import { useNavigate } from "react-router-dom";
+import CheckoutTotalView from "components/checkoutCart/CheckoutTotalView";
 
 const UserCart = () => {
   const localCart = useSelector((state) => state.cart);
@@ -126,31 +127,12 @@ const UserCart = () => {
           </Box>
         )}
       </Box>
-      <Box sx={{ gridColumn: "7/9" }}>
-        <Typography
-          paddingTop="3.5rem"
-          variant="h6"
-          color={theme.colors.siteDarkGreen}
-          fontFamily="Poppins"
-          fontWeight="400"
-        >
-          Have a Promo Code?
-        </Typography>
-        <TextField
-          label="Enter code"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-        />
-        <Typography variant="h6" gutterBottom>
-          Subtotal:€{cartTotal.toFixed(2)}
-        </Typography>
-        <Typography variant="h6" gutterBottom>
-          Delivery and Handling: €3.49
-        </Typography>
+      <Box sx={{ gridColumn: "7/9", paddingTop: "3.5rem" }}>
+        <CheckoutTotalView cartTotal={cartTotal}></CheckoutTotalView>
+        {console.log(delivery, ndd, cnc)}
         {(delivery || ndd) && (
           <PrimaryButton
-            sx={{ marginBottom: "1rem" }}
+            sx={{ marginY: "1rem" }}
             fullWidth={true}
             invert={true}
             onClick={gotToCheckOutOrderPage}

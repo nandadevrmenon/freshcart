@@ -7,7 +7,6 @@ import ItemTabs from "./ItemTabs";
 import ShopInfoBar from "./ShopInfoBar";
 import shopCarouselContent from "./shopCarouselContent";
 
-
 const ShopPage = (props) => {
   const { id } = useParams();
   const [shop, setShop] = useState(null);
@@ -65,47 +64,43 @@ const ShopPage = (props) => {
   // }
 
   return (
-    <Box width="100%" height="auto">
-      <Box marginX="auto" width="100vw" height={"100vh"}>
-        {shopCarouselContent()}
-      
-        <Box
-          display="flex"
-          flexDirection="row"
-          flexWrap="nowrap"
-          alignItems="centre"
-          justifyContent="space-between"
-          paddingY="1rem"
-          paddingTop="5rem"
+    <Box marginX="auto" width="80vw" height={"100vh"}>
+      <Box
+        display="flex"
+        flexDirection="row"
+        flexWrap="nowrap"
+        alignItems="centre"
+        justifyContent="space-between"
+        paddingY="1rem"
+        paddingTop="5rem"
+      >
+        <ShopInfoBar shop={shop}></ShopInfoBar>
+        <Paper
+          component="form"
+          sx={{
+            p: "2px 4px",
+            display: "flex",
+            alignItems: "center",
+            width: 400,
+            height: 50,
+            marginY: "auto",
+          }}
         >
-          <ShopInfoBar shop={shop}></ShopInfoBar>
-          <Paper
-            component="form"
-            sx={{
-              p: "2px 4px",
-              display: "flex",
-              alignItems: "center",
-              width: 400,
-              height: 50,
-              marginY: "auto",
-            }}
-          >
-            <InputBase
-              sx={{ ml: 1, flex: 1, color: theme.colors.darkGrey }}
-              placeholder="Search Shop"
-              inputProps={{ "aria-label": "Search Shop" }}
-            />
-            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon />
-            </IconButton>
-          </Paper>
-        </Box>
-        <ItemTabs
-          categories={shop ? shop.categories : []}
-          items={itemsList ? itemsList : []}
-        ></ItemTabs>
+          <InputBase
+            sx={{ ml: 1, flex: 1, color: theme.colors.darkGrey }}
+            placeholder="Search Shop"
+            inputProps={{ "aria-label": "Search Shop" }}
+          />
+          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+          <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+        </Paper>
       </Box>
+      <ItemTabs
+        categories={shop ? shop.categories : []}
+        items={itemsList ? itemsList : []}
+      ></ItemTabs>
     </Box>
   );
 };

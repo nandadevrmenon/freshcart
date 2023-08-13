@@ -10,6 +10,7 @@ import CheckoutTotalView from "components/checkoutCart/CheckoutTotalView";
 
 const UserCart = () => {
   const localCart = useSelector((state) => state.cart);
+  const isEmptyCart = Object.keys(localCart).length === 0;
   const cartShopId = useSelector((state) => state.cartShop);
   const [deliveryOptions, setDeliveryOptions] = useState({
     cnc: false,
@@ -129,13 +130,14 @@ const UserCart = () => {
       </Box>
       <Box sx={{ gridColumn: "7/9", paddingTop: "3.5rem" }}>
         <CheckoutTotalView cartTotal={cartTotal}></CheckoutTotalView>
-        {console.log(delivery, ndd, cnc)}
+
         {(delivery || ndd) && (
           <PrimaryButton
             sx={{ marginY: "1rem" }}
             fullWidth={true}
             invert={true}
             onClick={gotToCheckOutOrderPage}
+            disabled={isEmptyCart}
           >
             Checkout
           </PrimaryButton>
@@ -146,6 +148,7 @@ const UserCart = () => {
               fullWidth={true}
               invert={true}
               onClick={goToCNCOrderPage}
+              disabled={isEmptyCart}
             >
               Click n Collect
             </PrimaryButton>

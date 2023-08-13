@@ -106,6 +106,9 @@ const siteSlice = createSlice({
     setUserEmail: (state, action) => {
       state.user.email = action.payload.email;
     },
+    emptyCart: (state, action) => {
+      state.cart = {};
+    },
   },
 });
 
@@ -129,6 +132,7 @@ export const {
   setUserEmail,
   setUserName,
   setUserPhone,
+  emptyCart,
 } = siteSlice.actions;
 
 export default siteSlice.reducer;

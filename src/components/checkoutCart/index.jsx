@@ -6,6 +6,7 @@ import CheckoutItem from "./CheckoutItem";
 
 const CheckoutCart = ({ cartItems }) => {
   const localCart = useSelector((state) => state.cart);
+
   return (
     <Box
       display="flex"

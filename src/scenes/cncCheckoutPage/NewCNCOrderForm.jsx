@@ -9,12 +9,14 @@ import { useNavigate } from "react-router-dom";
 
 const dateSchema = yup.object().shape({
   completionDate: yup.string().required("Required"),
+  timeSlot: yup.string().required("Required"),
 });
 
 const tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
 const initialDateValue = {
   completionDate: tomorrow.toString(),
+  timeSlot: 0,
 };
 
 const sevenDays = [new Date(tomorrow)];
@@ -48,7 +50,7 @@ const months = [
   "December",
 ];
 
-const NewOrderForm = ({}) => {
+const NewCNCOrderForm = () => {
   const user = useSelector((state) => state.user);
   const localCart = useSelector((state) => state.cart);
   const token = useSelector((state) => state.token);
@@ -58,7 +60,7 @@ const NewOrderForm = ({}) => {
   const handleOrderSubmit = async (values, onSubmitProps) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/orders/${user._id}/placeneworder`,
+        `http://localhost:3001/orders/${user._id}/placenewcncorder`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json", Authorization: token },
@@ -66,7 +68,8 @@ const NewOrderForm = ({}) => {
             completionDate: values.completionDate,
             promoCode: "",
             cart: localCart,
-            orderType: "Delivery",
+            orderType: "Click & Collect",
+            timeSlot: values.timeSlot,
           }),
         }
       );
@@ -109,7 +112,7 @@ const NewOrderForm = ({}) => {
               fontFamily="Poppins"
               fontWeight="300"
             >
-              Delivery Date
+              Collection Date and Time
             </Typography>
             <TextField
               select
@@ -138,6 +141,35 @@ const NewOrderForm = ({}) => {
                 );
               })}
             </TextField>
+            <Typography
+              marginTop="1rem"
+              marginBottom="1rem"
+              variant="body"
+              color={theme.colors.blackGreen}
+              fontFamily="Poppins"
+              fontWeight="300"
+            >
+              Time of Collection
+            </Typography>
+            <TextField
+              select
+              fullWidth
+              size="small"
+              sx={{
+                width: "100%",
+                gridColumn: { sm: "0", md: "2/4" },
+              }}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.timeSlot}
+              name={"timeSlot"}
+              error={Boolean(errors.timeSlot)}
+              helperText={errors.timeSlot}
+            >
+              <MenuItem value={0}>9am to 12pm</MenuItem>
+              <MenuItem value={1}>12pm to 3pm</MenuItem>
+              <MenuItem value={2}>3pm to 6pm</MenuItem>
+            </TextField>
             <PrimaryButton
               sx={{ marginTop: "1rem" }}
               fullWidth={true}
@@ -156,4 +188,4 @@ const NewOrderForm = ({}) => {
   );
 };
 
-export default NewOrderForm;
+export default NewCNCOrderForm;

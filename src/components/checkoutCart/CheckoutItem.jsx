@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import theme from "theme";
-const CheckoutItem = ({ item, count }) => {
+const CheckoutItem = ({ item, count, sx }) => {
   const discountedPrice = (
     item.price -
     (item.price * item.discount) / 100
@@ -16,6 +16,7 @@ const CheckoutItem = ({ item, count }) => {
       marginY="1rem"
       padding="1rem"
       width="95%"
+      sx={{ ...sx }}
     >
       <Box>
         <Typography variant="h6">{item.name}</Typography>

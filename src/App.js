@@ -18,6 +18,7 @@ import AddNewItemPage from "scenes/addNewItemPage";
 import ManageShopPage from "scenes/manageShopPage";
 import ShopProfilePage from "scenes/shopProfilePage";
 import OrderConfirmation from "scenes/orderConfirmation";
+import CNCCheckoutPage from "scenes/cncCheckoutPage";
 
 function App() {
   const isShop = useSelector((state) => {
@@ -114,6 +115,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/profile/:userId" element={<ProfilePage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/clickncollect" element={<CNCCheckoutPage />} />
           <Route
             path="/orderConfirmation/:id"
             element={<OrderConfirmation />}

@@ -139,7 +139,7 @@ const UserCart = () => {
             onClick={gotToCheckOutOrderPage}
             disabled={isEmptyCart}
           >
-            Checkout
+            Checkout For Delivery
           </PrimaryButton>
         )}
         {cnc && (

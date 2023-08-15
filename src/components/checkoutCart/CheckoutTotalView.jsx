@@ -1,9 +1,12 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
 
-const CheckoutTotalView = ({ cartTotal }) => {
-  const actualTotal =
+const CheckoutTotalView = ({ cnc, cartTotal }) => {
+  console.log(cartTotal);
+
+  let actualTotal =
     cartTotal > 50 ? cartTotal.toFixed(2) : (cartTotal + 3.49).toFixed(2);
+  if (cnc) actualTotal = cartTotal.toFixed(2);
   return (
     <React.Fragment>
       <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -36,7 +39,7 @@ const CheckoutTotalView = ({ cartTotal }) => {
         <Typography
           variant="h6"
           display="inline"
-          sx={{ textDecoration: cartTotal > 50 && "line-through" }}
+          sx={{ textDecoration: (cartTotal > 50 || cnc) && "line-through" }}
           fontWeight="400"
           fontFamily="Poppins"
         >

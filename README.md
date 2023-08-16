@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# FreshCart - E-Grocery Ordering App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+FreshCart is an e-grocery ordering application that allows users to  order groceries for click-and-collect or delivery. The app caters to two types of users: Normal Shoppers and Shop Owners. Normal Shoppers can place orders, manage orders, rate stores, and update their personal information. Shop Owners can manage their orders, update their shop information, and perform other shop-related tasks.
 
-## Available Scripts
+Please note that the application is currently under development, and certain features such as payment gateway integration and additional UI enhancements are still in progress.
+The Backend is on another repository for which you can contact freshcart.dublin@gmail.com to gain access.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **User Types:**
+  - Normal Shoppers: Can browse products, place orders, manage orders, rate stores, and update personal information.
+  - Shop Owners: Can manage shop orders, update shop information, and perform shop-related actions.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Ordering Options:**
+  - Click-and-Collect: Shoppers can place orders and collect items directly from the store.
+  - Delivery: Shoppers can choose to have their orders delivered to their specified address.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Functionality:**
+  - Order Management: Users can view and manage their orders, including order status and history.
+  - Store Rating: Shoppers can rate and provide feedback for stores based on their shopping experience.
+  - Personal Info Update: Both user types can update their personal information.
 
-### `npm test`
+- **Pending Implementations:**
+  - Payment Gateway: Integration of a payment gateway for secure and convenient payment processing.
+  - Additional UI Features: Enhancements to the user interface, including adding missing UI elements and improving the overall user experience.
+  - Analytics: Helps Shop owners get an insight on their sales for a time period.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technology Stack
 
-### `npm run build`
+- Frontend: Developed using React Mui (Material-UI) and other third-party libraries for carousels.
+- Backend: The backend is developed using Node.js, Express, and MongoDB. It is hosted in a private repository and is not included in this public repository.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation and Usage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+As the backend is hosted in a private repository and not included here, the application cannot be fully functional on its own without the backend. To set up and run the complete FreshCart application, follow these steps:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone this repository: `git clone https://github.com/yourusername/freshcart.git`
+2. Set up and run your private backend by following the instructions in the backend repository.
+3. Update the frontend to communicate with your backend server by configuring API endpoints.
 
-### `npm run eject`
+## Contributing
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Contributions are welcome! If you'd like to contribute to FreshCart, please follow these steps:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/new-feature`
+3. Make your changes and commit them: `git commit -m "Add new feature"`
+4. Push to the branch: `git push origin feature/new-feature`
+5. Create a pull request describing your changes.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

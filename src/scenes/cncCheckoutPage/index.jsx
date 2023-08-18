@@ -100,7 +100,7 @@ const CNCCheckoutPage = () => {
     >
       <Box sx={{ gridColumn: "1/6", gridRow: "auto" }}>
         <Typography
-          variant="h3"
+          variant="h4"
           color={theme.colors.siteDarkGreen}
           fontFamily="Poppins"
           fontWeight="400"

@@ -93,7 +93,7 @@ const UserCart = () => {
     >
       <Box sx={{ gridColumn: "1/7", gridRow: "auto" }}>
         <Typography
-          variant="h3"
+          variant="h4"
           color={theme.colors.siteDarkGreen}
           fontFamily="Poppins"
           fontWeight="400"
@@ -154,8 +154,6 @@ const UserCart = () => {
             </PrimaryButton>
           </>
         )}
-
-        <Box display="flex"></Box>
       </Box>
     </Box>
   );

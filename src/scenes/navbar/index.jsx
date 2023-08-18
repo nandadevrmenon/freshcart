@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
+import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
 import theme from "theme";
 import { useNavigate } from "react-router-dom";
@@ -47,7 +48,11 @@ const NavBar = () => {
   };
 
   const goToUserProfile = () => {
-    navigate(`profile/${userID}`);
+    navigate(`/profile/${userID}`);
+  };
+
+  const goToManageOrders = () => {
+    navigate(`/orders/${userID}`);
   };
 
   const promptLogin = () => {};
@@ -145,25 +150,46 @@ const NavBar = () => {
               </Button>
             </Box>
             {isLoggedIn && (
-              <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                <Button
-                  sx={{
-                    flexGrow: 1,
-                    display: { xs: "none", md: "flex" },
-                    fontWeight: "bold",
-                    color: "#fff",
-                  }}
-                  onClick={goToUserProfile}
-                >
-                  <Typography
-                    fontFamily="Poppins"
-                    variant="h6"
-                    sx={{ textTransform: "initial !important" }}
+              <>
+                <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                  <Button
+                    sx={{
+                      flexGrow: 1,
+                      display: { xs: "none", md: "flex" },
+                      fontWeight: "bold",
+                      color: "#fff",
+                    }}
+                    onClick={goToManageOrders}
                   >
-                    Profile
-                  </Typography>
-                </Button>
-              </Box>
+                    <Typography
+                      fontFamily="Poppins"
+                      variant="h6"
+                      sx={{ textTransform: "initial !important" }}
+                    >
+                      Orders
+                    </Typography>
+                  </Button>
+                </Box>
+                <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                  <Button
+                    sx={{
+                      flexGrow: 1,
+                      display: { xs: "none", md: "flex" },
+                      fontWeight: "bold",
+                      color: "#fff",
+                    }}
+                    onClick={goToUserProfile}
+                  >
+                    <Typography
+                      fontFamily="Poppins"
+                      variant="h6"
+                      sx={{ textTransform: "initial !important" }}
+                    >
+                      Profile
+                    </Typography>
+                  </Button>
+                </Box>
+              </>
             )}
 
             <Box display="flex" alignItems="center">
@@ -183,27 +209,20 @@ const NavBar = () => {
                 </Badge>
               </IconButton>
             </Box>
-            {/* {isLoggedIn && (
+            {isLoggedIn && (
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                <Button
+                <IconButton
                   onClick={signOut}
-                  sx={{
-                    flexGrow: 1,
-                    display: { xs: "none", md: "flex" },
-                    fontWeight: "bold",
-                    color: "#fff",
+                  aria-label="chat"
+                  style={{
+                    border: "none",
+                    outline: "none",
                   }}
                 >
-                  <Typography
-                    fontFamily="Poppins"
-                    variant="h6"
-                    sx={{ textTransform: "initial !important" }}
-                  >
-                    Sign Out
-                  </Typography>
-                </Button>
+                  <LogoutIcon sx={{ color: theme.colors.white }}></LogoutIcon>
+                </IconButton>
               </Box>
-            )} */}
+            )}
           </Box>
         </Toolbar>
       </Container>

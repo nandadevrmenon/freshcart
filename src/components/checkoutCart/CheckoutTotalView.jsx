@@ -2,8 +2,6 @@ import React from "react";
 import { Typography, Box } from "@mui/material";
 
 const CheckoutTotalView = ({ cnc, cartTotal }) => {
-  console.log(cartTotal);
-
   let actualTotal =
     cartTotal > 50 ? cartTotal.toFixed(2) : (cartTotal + 3.49).toFixed(2);
   if (cnc) actualTotal = cartTotal.toFixed(2);

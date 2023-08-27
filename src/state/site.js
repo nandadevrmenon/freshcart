@@ -109,6 +109,7 @@ const siteSlice = createSlice({
     },
     emptyCart: (state, action) => {
       state.cart = {};
+      state.cartShop = "";
     },
   },
 });

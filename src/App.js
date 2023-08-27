@@ -22,6 +22,8 @@ import CNCCheckoutPage from "scenes/cncCheckoutPage";
 import UserOrdersPage from "scenes/userOrdersPage";
 import HomeShopPage from "scenes/homeShopPage";
 import ManageShopOrdersPage from "scenes/manageShopOrdersPage";
+import DeleteCartModalProvider from "components/DeleteCartModalProvider.jsx/DeleteCartModalProvider";
+import { Delete } from "@mui/icons-material";
 
 function App() {
   const isShop = useSelector((state) => {
@@ -88,10 +90,6 @@ function App() {
                   element={<ShopHome />}
                 ></Route>
                 <Route
-                  path="/protected/:id/home"
-                  element={<ShopHome />}
-                ></Route>
-                <Route
                   path="/protected/:id/products"
                   element={<ShopProductsPage />}
                 ></Route>
@@ -119,7 +117,24 @@ function App() {
               ></Route>
             )}
           </Route>
-          <Route path="/" element={<HomePage />} />
+
+          <Route
+            path="/"
+            element={
+              <DeleteCartModalProvider>
+                <HomePage />
+              </DeleteCartModalProvider>
+            }
+          />
+          <Route
+            path="/shops/:id"
+            element={
+              <DeleteCartModalProvider>
+                <ShopPage />
+              </DeleteCartModalProvider>
+            }
+          />
+
           <Route path="/profile/:userId" element={<ProfilePage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/clickncollect" element={<CNCCheckoutPage />} />
@@ -129,9 +144,8 @@ function App() {
           />
           <Route path={"/orders/:id"} element={<UserOrdersPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/shops/:id" element={<ShopPage />} />
           <Route path="/cart/:id" element={<UserCart />} />
-          <Route path="/shop" element={<HomeShopPage />} />
+          {/* <Route path="/shop" element={<HomeShopPage />} /> */}
         </Routes>
         <Footer></Footer>
       </BrowserRouter>

@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { updateCart, updateCartShop } from "state/site";
+import { useModalContext } from "./DeleteCartModalProvider.jsx/DeleteCartModalProvider";
 import { Fragment, useState, useRef, useEffect } from "react";
 import { Box, Typography, Collapse, CardActions, Button } from "@mui/material";
+
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import theme from "theme";
@@ -18,9 +20,12 @@ const ItemCountControl = (props) => {
     return state.cartShop;
   });
   const { productID, shopId } = props;
-  const count = cart[productID] || 0;
 
-  const [ItemCount, setItemCount] = useState(count);
+  const [ItemCount, setItemCount] = useState(cart[productID] || 0);
+  useEffect(() => {
+    setItemCount(cart[productID] || 0);
+  }, [cart]);
+  const { openModal } = useModalContext();
 
   const dispatch = useDispatch();
   const isInitialRender = useRef(true);
@@ -63,6 +68,8 @@ const ItemCountControl = (props) => {
       setItemCount((prev) => {
         return prev + 1;
       });
+    } else if (shopId !== cartShop) {
+      openModal();
     }
   };
 

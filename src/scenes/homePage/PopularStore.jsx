@@ -24,20 +24,13 @@ const PopularStore = (props) => {
   let delivery = shop.delivery;
 
   return (
-    <Box height="30rem" display="flex" flexDirection="column">
-      <Box
-        sx={{
-          backgroundImage: `url("http://localhost:3001/assets/tonicwater.jpg")`,
-          backgroundRepeat: "none",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          height: { sm: "9rem", md: "15rem" },
-          borderRadius: "12px",
-        }}
-        alt="The house from the offer."
-        src=""
-      ></Box>
-      <Box sx={{ gridColumn: "1/8", gridRow: "3/5" }}>
+    <Box
+      height="30rem"
+      display="grid"
+      gridTemplateColumns="repeat(3,minmax(0,1fr))"
+      gap="10px"
+    >
+      <Box gridColumn={"span 2"}>
         <Typography
           margin={0}
           marginTop="8px"
@@ -141,12 +134,26 @@ const PopularStore = (props) => {
             {"|"}
           </Typography>
         </Box>
+        <Box sx={{ marginTop: "7px" }}>
+          <PrimaryButton onClick={goToShopPage} invert={true}>
+            Shop Here
+          </PrimaryButton>
+        </Box>
       </Box>
-      <Box sx={{ gridColumn: "span 8", gridRow: "5/6", marginTop: "7px" }}>
-        <PrimaryButton onClick={goToShopPage} invert={true}>
-          Shop Here
-        </PrimaryButton>
-      </Box>
+      <Box
+        marginY="0.7rem"
+        sx={{
+          gridColumn: "span 1",
+          backgroundImage: `url("http://localhost:3001/assets/${shop.bannerPath}")`,
+          backgroundRepeat: "none",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          height: { sm: "9rem", md: "12rem" },
+          borderRadius: "12px",
+        }}
+        alt="The house from the offer."
+        src=""
+      ></Box>
     </Box>
   );
 };

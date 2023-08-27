@@ -11,7 +11,11 @@ const UserOrderCard = ({ order, viewOrderHandler }) => {
     );
   }, 0);
   const actualTotal = total > 50 ? total.toFixed(2) : (total + 3.49).toFixed(2);
-
+  const isComplete =
+    order.status === "Collected Successfully" ||
+    order.status === "Delivered Successfully";
+  const isCancalled =
+    order.status === "Cancelled" || order.status === "Cancelled by Seller";
   return (
     <Box
       display="grid"
@@ -45,7 +49,18 @@ const UserOrderCard = ({ order, viewOrderHandler }) => {
             {order.shop.name}
           </Typography>
 
-          <Typography variant="body" fontFamily="Poppins" fontWeight="500">
+          <Typography
+            variant="body"
+            fontFamily="Poppins"
+            fontWeight="500"
+            color={
+              isComplete
+                ? theme.colors.celadon
+                : isCancalled
+                ? theme.colors.darkDangerRed
+                : theme.colors.darkGrey
+            }
+          >
             {order.status}
           </Typography>
         </Box>

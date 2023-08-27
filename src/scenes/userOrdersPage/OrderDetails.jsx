@@ -13,6 +13,9 @@ const OrderDetails = ({ order, backToHistoryHandler, setOrderHistory }) => {
   const token = useSelector((state) => state.token);
   const [isInRatingMode, setIsInRatingMode] = useState(false);
   const [orderRating, setOrderRating] = useState(order.rating);
+  const isComplete =
+    order.status === "Delivered Successfully" ||
+    order.status === "Collected Successfully";
   const cartTotal = Object.values(order.itemList).reduce((total, item) => {
     return (
       total +
@@ -64,22 +67,24 @@ const OrderDetails = ({ order, backToHistoryHandler, setOrderHistory }) => {
         {Boolean(orderRating) ? (
           <Rating readOnly={true} value={orderRating}></Rating>
         ) : (
-          <div>
-            {isInRatingMode ? (
-              <OrderRatingForm
-                onUpdateRating={updateRatingHandler}
-              ></OrderRatingForm>
-            ) : (
-              <PrimaryButton
-                invert={true}
-                onClick={() => {
-                  setIsInRatingMode(true);
-                }}
-              >
-                Rate
-              </PrimaryButton>
-            )}
-          </div>
+          isComplete && (
+            <div>
+              {isInRatingMode ? (
+                <OrderRatingForm
+                  onUpdateRating={updateRatingHandler}
+                ></OrderRatingForm>
+              ) : (
+                <PrimaryButton
+                  invert={true}
+                  onClick={() => {
+                    setIsInRatingMode(true);
+                  }}
+                >
+                  Rate
+                </PrimaryButton>
+              )}
+            </div>
+          )
         )}
       </Box>
       <Box

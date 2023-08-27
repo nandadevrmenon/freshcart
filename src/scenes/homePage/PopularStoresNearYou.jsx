@@ -7,7 +7,7 @@ import PopularStore from "./PopularStore";
 const PopularStoresNearYou = () => {
   const [shops, setShops] = useState([]);
   const userArea = useSelector((state) => {
-    return state.user ? state.user.address[3] : "";
+    return state.user ? state.user.address[2] : "";
   });
   useEffect(() => {
     const fetchTopDiscountedItems = async () => {
@@ -22,8 +22,8 @@ const PopularStoresNearYou = () => {
             body: userArea ? JSON.stringify({ area: userArea }) : "",
           }
         );
-        const items = await response.json();
-        setShops(items);
+        const shops = await response.json();
+        setShops(shops);
       } catch (error) {
         console.error("Error fetching Popular Stores:", error);
       }

@@ -17,7 +17,7 @@ const ShopOrderCard = ({ order, editOrderHandler }) => {
     order.status === "Collected Successfully" ||
     order.status === "Delivered Successfully";
   const isCancalled =
-    order.status === "Cancalled" || order.status === "Cancelled By Owner";
+    order.status === "Cancelled" || order.status === "Cancelled by Seller";
   return (
     <Box
       display="grid"

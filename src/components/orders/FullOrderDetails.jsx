@@ -38,7 +38,8 @@ const FullOrderDetails = ({
   const isDelivery = type === "Delivery";
   const isComplete =
     status === "Collected Successfully" || status === "Delivered Successfully";
-  const isCancalled = status === "Cancalled" || status === "Cancelled By Owner";
+  const isCancalled =
+    status === "Cancelled" || status === "Cancelled by Seller";
   return (
     <Box
       sx={{

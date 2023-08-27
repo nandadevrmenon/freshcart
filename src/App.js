@@ -20,6 +20,7 @@ import ShopProfilePage from "scenes/shopProfilePage";
 import OrderConfirmation from "scenes/orderConfirmation";
 import CNCCheckoutPage from "scenes/cncCheckoutPage";
 import UserOrdersPage from "scenes/userOrdersPage";
+import HomeShopPage from "scenes/homeShopPage";
 
 function App() {
   const isShop = useSelector((state) => {

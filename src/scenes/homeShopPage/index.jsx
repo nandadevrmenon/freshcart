@@ -1,19 +1,11 @@
-import React from "react"; // Import React if not already imported
-import PopularStore from "../homePage/PopularStore"; // Adjust the path based on your actual file structure
+// import React from "react";
+// import PopularStore from "../homePage/PopularStore";
 
-// Your HomePageShop component code
-const HomePageShop = () => {
-  // Your component logic
+// const HomePageShop = () => {
 
-  return (
-    // JSX content of your HomePageShop component
-    <div>
-      {/* You can use the PopularStore component here */}
-      <PopularStore  />
-      
-      {/* Other content of your HomePageShop component */}
-    </div>
-  );
-};
+//   return (
+//    <PopularStore />
+//   );
+// };
 
-export default HomePageShop;
+// export default HomePageShop;

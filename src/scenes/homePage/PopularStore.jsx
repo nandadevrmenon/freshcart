@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import PrimaryButton from "components/PrimaryButton";
+import PrimaryButton from "components/buttons/PrimaryButton";
 import StarsIcon from "@mui/icons-material/Stars";
 import theme from "theme";
 import { useNavigate } from "react-router-dom";

@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import theme from "theme";
 import ShopItemsTabs from "./ShopItemTabs";
 import EditItemForm from "./EditItemForm";
-import PrimaryButton from "components/PrimaryButton";
+import PrimaryButton from "components/buttons/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 

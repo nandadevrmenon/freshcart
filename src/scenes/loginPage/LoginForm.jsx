@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import theme from "theme";
 import { Fragment } from "react";
-import PrimaryButton from "components/PrimaryButton";
+import PrimaryButton from "components/buttons/PrimaryButton";
 import { useDispatch } from "react-redux";
 import { setLogin, setShopLogin } from "state/site";
 

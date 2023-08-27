@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -7,16 +7,17 @@ import { Box, Typography, TextField, Modal } from "@mui/material";
 import PrimaryButton from "components/buttons/PrimaryButton";
 import CheckoutCart from "components/checkoutCart";
 import CheckoutTotalView from "components/checkoutCart/CheckoutTotalView";
-import CheckoutAddressView from "./CheckoutAddressView";
+import CheckoutAddressView from "scenes/checkoutPage/CheckoutAddressView";
 import EditAddress from "components/editFields/EditAddress";
 import theme from "theme";
-import NewOrderForm from "./NewOrderForm";
+import NewOrderForm from "scenes/checkoutPage/NewOrderForm";
+import NewCNCOrderForm from "./NewCNCOrderForm";
 
 const promoCodeSchema = yup.object().shape({
   promoCode: yup.string(),
 });
 
-const CheckoutPage = () => {
+const CNCCheckoutPage = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const localCart = useSelector((state) => state.cart);
@@ -60,7 +61,7 @@ const CheckoutPage = () => {
             }
           );
           const options = await response.json();
-          if (!options.delivery) navigate(`/cart/${user._id}`);
+          if (!options.cnc) navigate(`/cart/${user._id}`);
           setOffersDelivery(options.delivery);
         } catch (err) {
           console.log("Error fetching Delivery Options:", err);
@@ -110,11 +111,6 @@ const CheckoutPage = () => {
         <CheckoutCart cartItems={cartItems}></CheckoutCart>
       </Box>
       <Box sx={{ gridColumn: "6/9", paddingTop: "3.5rem" }}>
-        <CheckoutAddressView
-          address={user.address}
-          openAddressModalHandler={handleOpen}
-        ></CheckoutAddressView>
-
         <Formik
           initialValues={{ promoCode: "" }}
           validationSchema={promoCodeSchema}
@@ -134,7 +130,6 @@ const CheckoutPage = () => {
             return (
               <form onSubmit={handleSubmit}>
                 <Typography
-                  marginTop="2rem"
                   variant="h6"
                   color={theme.colors.siteDarkGreen}
                   fontFamily="Poppins"
@@ -169,29 +164,11 @@ const CheckoutPage = () => {
             );
           }}
         </Formik>
-        <CheckoutTotalView cartTotal={cartTotal}></CheckoutTotalView>
-
-        <NewOrderForm></NewOrderForm>
-        <Modal open={open} onClose={handleClose}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              backgroundColor: theme.colors.seaShellWhite,
-              width: "50vw",
-              borderRadius: "12px",
-              boxShadow: 24,
-              p: 4,
-            }}
-          >
-            <EditAddress inEditMode={true}></EditAddress>
-          </Box>
-        </Modal>
+        <CheckoutTotalView cnc={true} cartTotal={cartTotal}></CheckoutTotalView>
+        <NewCNCOrderForm></NewCNCOrderForm>
       </Box>
     </Box>
   );
 };
 
-export default CheckoutPage;
+export default CNCCheckoutPage;

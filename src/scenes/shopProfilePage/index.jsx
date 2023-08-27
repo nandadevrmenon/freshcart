@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { Box, Typography } from "@mui/material";
-import DangerButton from "components/DangerButton";
+import DangerButton from "components/buttons/DangerButton";
 import theme from "theme";
 import ShopEmailEditor from "./ShopEmailEditor";
 import ShopPhoneEditor from "./ShopPhoneEditor";
-import PasswordEditor from "components/PasswordEditor";
+import PasswordEditor from "components/editFields/PasswordEditor";
 
 const ShopProfilePage = (props) => {
   const [isShowingDeleteModal, setIsShowingDeleteModal] = useState(false);

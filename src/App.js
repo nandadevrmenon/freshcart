@@ -17,7 +17,9 @@ import ShopProductsPage from "scenes/shopProductsPage";
 import AddNewItemPage from "scenes/addNewItemPage";
 import ManageShopPage from "scenes/manageShopPage";
 import ShopProfilePage from "scenes/shopProfilePage";
-import HomeShopPage from "scenes/homeShopPage";
+import OrderConfirmation from "scenes/orderConfirmation";
+import CNCCheckoutPage from "scenes/cncCheckoutPage";
+import UserOrdersPage from "scenes/userOrdersPage";
 
 function App() {
   const isShop = useSelector((state) => {
@@ -113,7 +115,13 @@ function App() {
           </Route>
           <Route path="/" element={<HomePage />} />
           <Route path="/profile/:userId" element={<ProfilePage />} />
-          <Route path="/checkout/:userId" element={<CheckoutPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/clickncollect" element={<CNCCheckoutPage />} />
+          <Route
+            path="/orderConfirmation/:id"
+            element={<OrderConfirmation />}
+          />
+          <Route path={"/orders/:id"} element={<UserOrdersPage />}></Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/shops/:id" element={<ShopPage />} />
           <Route path="/cart/:id" element={<UserCart />} />

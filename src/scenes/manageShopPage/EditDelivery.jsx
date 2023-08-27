@@ -13,8 +13,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import theme from "theme";
 import EditIcon from "@mui/icons-material/Edit";
-import PrimaryButton from "components/PrimaryButton";
-import DangerButton from "components/DangerButton";
+import PrimaryButton from "components/buttons/PrimaryButton";
+import DangerButton from "components/buttons/DangerButton";
 import { setShopDelivery, setShopName } from "state/site";
 
 const validationSchema = yup

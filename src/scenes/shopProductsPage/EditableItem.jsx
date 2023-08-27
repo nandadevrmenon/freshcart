@@ -1,7 +1,7 @@
 import { Box, Typography, Button } from "@mui/material";
 import theme from "theme";
 import PriceView from "./PriceView";
-import PrimaryButton from "components/PrimaryButton";
+import PrimaryButton from "components/buttons/PrimaryButton";
 
 const EditableItem = (props) => {
   const updateEditItemForm = () => {

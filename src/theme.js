@@ -8,6 +8,7 @@ const theme = {
     sitePink: "#DB6C79",
     oldLace: "#F8F5EB",
     borderGray: "#CECECE",
+    lightBorderGray: "#E6E6E6",
     grey: "#ABABAB",
     darkGrey: "#666666",
     siteDarkGreen: "#399359",

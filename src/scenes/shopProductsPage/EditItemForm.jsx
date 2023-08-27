@@ -3,9 +3,9 @@ import { Box, MenuItem, TextField } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import theme from "theme";
-import PrimaryButton from "components/PrimaryButton";
+import PrimaryButton from "components/buttons/PrimaryButton";
 import { useDispatch, useSelector } from "react-redux";
-import DangerButton from "components/DangerButton";
+import DangerButton from "components/buttons/DangerButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { updateShopItem, deleteShopItem } from "state/site";
 

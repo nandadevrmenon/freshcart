@@ -50,6 +50,10 @@ const NavBar = () => {
     navigate(`profile/${userID}`);
   };
 
+  const goToShop = () => {
+    navigate("/shop");
+  };
+
   const promptLogin = () => {};
 
   return (
@@ -134,6 +138,7 @@ const NavBar = () => {
                   fontWeight: "bold",
                   color: "#fff",
                 }}
+                onClick={goToShop}
               >
                 <Typography
                   fontFamily="Poppins"

@@ -17,6 +17,7 @@ const theme = {
     warningYellow: "#F3AE0B",
     darkWarningYellow: "#DFA00E",
     blackGreen: "#1D3427",
+    celadon: "#39BF7E",
   },
 };
 

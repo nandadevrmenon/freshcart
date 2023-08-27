@@ -33,6 +33,9 @@ const ShopNavbar = () => {
   const goToProductsPage = () => {
     navigate(`/protected/${shopId}/products`);
   };
+  const goToManageOrderPage = () => {
+    navigate(`/protected/${shopId}/manageOrders`);
+  };
   const goToManageShopPage = () => {
     navigate(`/protected/${shopId}/manageShop`);
   };
@@ -128,6 +131,25 @@ const ShopNavbar = () => {
                   onClick={goToManageShopPage}
                 >
                   Manage Shop
+                </Typography>
+              </Button>
+            </Box>
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              <Button
+                sx={{
+                  flexGrow: 1,
+                  display: { xs: "none", md: "flex" },
+                  fontWeight: "bold",
+                  color: "#fff",
+                }}
+              >
+                <Typography
+                  fontFamily="Poppins"
+                  variant="h6"
+                  sx={{ textTransform: "initial !important" }}
+                  onClick={goToManageOrderPage}
+                >
+                  Manage Orders
                 </Typography>
               </Button>
             </Box>

@@ -1,10 +1,11 @@
+import React from "react";
 import { Typography } from "@mui/material";
 import theme from "theme";
 
 const ItemCountText = ({ itemList }) => {
   return itemList.map((item, index) => {
     return (
-      <>
+      <React.Fragment key={item._id}>
         <Typography
           variant="body"
           fontFamily="Poppins"
@@ -35,7 +36,7 @@ const ItemCountText = ({ itemList }) => {
         >
           {index === itemList.length - 1 ? item.count : item.count + ", "}
         </Typography>
-      </>
+      </React.Fragment>
     );
   });
 };

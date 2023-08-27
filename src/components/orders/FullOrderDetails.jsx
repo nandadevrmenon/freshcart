@@ -36,6 +36,9 @@ const FullOrderDetails = ({
   timeSlot,
 }) => {
   const isDelivery = type === "Delivery";
+  const isComplete =
+    status === "Collected Successfully" || status === "Delivered Successfully";
+  const isCancalled = status === "Cancalled" || status === "Cancelled By Owner";
   return (
     <Box
       sx={{
@@ -48,14 +51,30 @@ const FullOrderDetails = ({
         color={theme.colors.blackGreen}
         fontFamily="Poppins"
         fontWeight="400"
+        display="inline"
       >
-        Status: {status}
+        Status:
+      </Typography>
+      <Typography
+        variant="h4"
+        color={
+          isComplete
+            ? theme.colors.celadon
+            : isCancalled
+            ? theme.colors.darkDangerRed
+            : theme.colors.darkGrey
+        }
+        fontFamily="Poppins"
+        fontWeight="400"
+        display="inline"
+      >
+        {status}
       </Typography>
       {isDelivery && (
         <>
           <Typography
             variant="h6"
-            color={theme.colors.siteDarkGreen}
+            color={theme.colors.blackGreen}
             fontFamily="Poppins"
             fontWeight="400"
           >
@@ -63,7 +82,7 @@ const FullOrderDetails = ({
           </Typography>
           <Typography
             variant="body"
-            color={theme.colors.blackGreen}
+            color={theme.colors.darkGrey}
             fontFamily="Poppins"
             fontWeight="400"
           >
@@ -73,16 +92,19 @@ const FullOrderDetails = ({
       )}
       <Typography
         variant="h6"
-        color={theme.colors.siteDarkGreen}
+        color={theme.colors.blackGreen}
         fontFamily="Poppins"
         fontWeight="400"
+        borderTop={`1px solid ${theme.colors.borderGray}`}
+        marginTop="0.5rem"
+        paddingTop="0.5rem"
       >
         {isDelivery ? "Delivery Date and Time: " : "Collection Date and Time"}
       </Typography>
       <Typography
         variant="body"
         display="block"
-        color={theme.colors.blackGreen}
+        color={theme.colors.darkGrey}
         fontFamily="Poppins"
         fontWeight="400"
       >
@@ -94,21 +116,28 @@ const FullOrderDetails = ({
       </Typography>
       <Typography
         variant="body"
-        color={theme.colors.blackGreen}
+        color={theme.colors.darkGrey}
         fontFamily="Poppins"
-        fontWeight="500"
+        fontWeight="400"
       >
         {"Time: "}
       </Typography>
       <Typography
         variant="body"
-        color={theme.colors.blackGreen}
+        color={theme.colors.darkGrey}
         fontFamily="Poppins"
-        fontWeight="500"
+        fontWeight="400"
       >
         {isDelivery ? "Delivery between 8am and 12pm" : timeSlots[timeSlot]}
       </Typography>
-      <Box display="flex" alignItems="center" justifyContent="space-between">
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        borderTop={`1px solid ${theme.colors.borderGray}`}
+        paddingTop="0.5rem"
+        marginTop="0.5em"
+      >
         <Typography
           variant="body"
           display="inline"

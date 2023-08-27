@@ -21,6 +21,7 @@ import OrderConfirmation from "scenes/orderConfirmation";
 import CNCCheckoutPage from "scenes/cncCheckoutPage";
 import UserOrdersPage from "scenes/userOrdersPage";
 import HomeShopPage from "scenes/homeShopPage";
+import ManageShopOrdersPage from "scenes/manageShopOrdersPage";
 
 function App() {
   const isShop = useSelector((state) => {
@@ -106,6 +107,10 @@ function App() {
                   path="/protected/:id/profile"
                   element={<ShopProfilePage />}
                 ></Route>
+                <Route
+                  path="/protected/:id/manageOrders"
+                  element={<ManageShopOrdersPage />}
+                />
               </React.Fragment>
             ) : (
               <Route
@@ -122,7 +127,7 @@ function App() {
             path="/orderConfirmation/:id"
             element={<OrderConfirmation />}
           />
-          <Route path={"/orders/:id"} element={<UserOrdersPage />}></Route>
+          <Route path={"/orders/:id"} element={<UserOrdersPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/shops/:id" element={<ShopPage />} />
           <Route path="/cart/:id" element={<UserCart />} />

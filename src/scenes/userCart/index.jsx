@@ -131,7 +131,7 @@ const UserCart = () => {
       <Box sx={{ gridColumn: "7/9", paddingTop: "3.5rem" }}>
         <CheckoutTotalView cartTotal={cartTotal}></CheckoutTotalView>
 
-        {(delivery || ndd) && (
+        {delivery && (
           <PrimaryButton
             sx={{ marginY: "1rem" }}
             fullWidth={true}
@@ -149,6 +149,7 @@ const UserCart = () => {
               invert={true}
               onClick={goToCNCOrderPage}
               disabled={isEmptyCart}
+              sx={{ marginY: !delivery ? "1rem" : "0" }}
             >
               Click n Collect
             </PrimaryButton>

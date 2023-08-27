@@ -5,8 +5,6 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import theme from "theme";
 import EditableItem from "./EditableItem";
-import { useEffect } from "react";
-import { Typography } from "@mui/material";
 
 const ShopItemsTabs = (props) => {
   const [category, setCategory] = React.useState(0);
@@ -47,7 +45,7 @@ const ShopItemsTabs = (props) => {
         </Tabs>
       </Box>
       {/* returns one item panel in which the shop items change based on the filters */}
-      <ItemsPanel category={category}>
+      <Box sx={{ m: 5, width: "100%", marginX: "auto" }} category={category}>
         {allItems.map((item, index) => {
           return (
             <EditableItem
@@ -63,15 +61,9 @@ const ShopItemsTabs = (props) => {
             ></EditableItem>
           );
         })}
-      </ItemsPanel>
+      </Box>
     </React.Fragment>
   );
 };
 
 export default ShopItemsTabs;
-
-function ItemsPanel(props) {
-  const { children } = props;
-
-  return <Box sx={{ m: 5, width: "100%", marginX: "auto" }}>{children}</Box>;
-}

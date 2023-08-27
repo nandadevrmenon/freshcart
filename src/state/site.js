@@ -101,6 +101,7 @@ const siteSlice = createSlice({
       state.user.phone = action.payload.phone;
     },
     setUserAddress: (state, action) => {
+      console.log(action.payload.address);
       state.user.address = action.payload.address;
     },
     setUserEmail: (state, action) => {

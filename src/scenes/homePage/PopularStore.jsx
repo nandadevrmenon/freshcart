@@ -25,10 +25,12 @@ const PopularStore = (props) => {
 
   return (
     <Box
-      height="30rem"
       display="grid"
       gridTemplateColumns="repeat(3,minmax(0,1fr))"
-      gap="10px"
+      gap="5px"
+      padding="1rem"
+      border={`1px solid ${theme.colors.borderGray}`}
+      borderRadius="8px"
     >
       <Box gridColumn={"span 2"}>
         <Typography

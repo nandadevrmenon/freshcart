@@ -82,7 +82,9 @@ const EditAddress = (props) => {
     const responseJSON = await response.json();
     const newAddress = responseJSON.address;
     if (newAddress) {
-      dispatch(setUserAddress({ address: address }));
+      isShop
+        ? dispatch(setShopAddress({ address: address }))
+        : dispatch(setUserAddress({ address: address }));
       setIsInEditMode(false);
     }
   };

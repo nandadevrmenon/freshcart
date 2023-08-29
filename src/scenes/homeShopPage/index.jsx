@@ -3,22 +3,29 @@ import { useSelector } from "react-redux";
 import { Box, Typography, TextField, Button } from "@mui/material";
 import theme from "theme";
 import PopularStore from "scenes/homePage/PopularStore";
+import PopularStoresNearYou from "scenes/homePage/PopularStoresNearYou";
+import PrimaryButton from "components/buttons/PrimaryButton";
 
 const HomeShopPage = () => {
   const [shops, setShops] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const userArea = useSelector((state) => state.user ? state.user.address[3] : "");
+  const userArea = useSelector((state) =>
+    state.user ? state.user.address[3] : ""
+  );
 
   useEffect(() => {
-    const fetchTopDiscountedItems = async () => {
+    const fetchStores = async () => {
       try {
-        const response = await fetch("http://localhost:3001/shops/popularshops", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: userArea ? JSON.stringify({ area: userArea }) : "",
-        });
+        const response = await fetch(
+          "http://localhost:3001/shops/popularshops",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: userArea ? JSON.stringify({ area: userArea }) : "",
+          }
+        );
         const items = await response.json();
         setShops(items);
       } catch (error) {
@@ -26,7 +33,7 @@ const HomeShopPage = () => {
       }
     };
 
-    fetchTopDiscountedItems();
+    fetchStores();
   }, [userArea]);
 
   const filteredShops = shops.filter((shop) =>
@@ -35,49 +42,47 @@ const HomeShopPage = () => {
 
   return (
     <Fragment>
-      <Box paddingTop="5rem" paddingX="5rem">
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          mb="1.5rem"
-        >
-          <Typography
-            variant="h4"
-            fontFamily="Poppins"
-            fontWeight="400"
-            color={theme.colors.siteGreen}
-            borderBottom="solid 2px #EEE9E9"
+      <Box paddingTop="5rem">
+        <Box paddingTop="2rem" paddingX="5rem">
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ borderBottom: "solid 1px #EEE9E9" }}
+            marginBottom="1rem"
           >
-            {userArea ? "Popular Stores Near You" : "Search All Shops"}
-          </Typography>
-          <Box display="flex" alignItems="center">
-            <TextField
-              label="Search Shops"
-              variant="outlined"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              sx={{ marginRight: "1rem" }}
-            />
-            <Button
-              variant="contained"
-              color="success"
-              onClick={() => setSearchQuery("")}
+            <Typography
+              variant="h3"
+              fontFamily="Poppins"
+              fontWeight="400"
+              color={theme.colors.siteGreen}
             >
-              Clear
-            </Button>
+              All Stores
+            </Typography>
+            <Box display="flex" alignItems="center" paddingBottom="0.5rem">
+              <TextField
+                label="Search By Store Name"
+                variant="outlined"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                sx={{ marginRight: "1rem", width: "300px" }}
+              />
+              <PrimaryButton invert={true} onClick={() => setSearchQuery("")}>
+                Clear
+              </PrimaryButton>
+            </Box>
           </Box>
         </Box>
         <Box
-          mx="1rem"
-          width="85%"
+          mx="auto"
+          width="87%"
           display="grid"
-          gap="50px"
-          gridTemplateColumns="repeat(2, minmax(0, 1fr))"
+          gap="30px"
+          gridTemplateColumns="repeat(2,minmax(0,1fr))"
         >
-          {filteredShops.map((shop) => (
-            <PopularStore key={shop._id + "store"} shop={shop} />
-          ))}
+          {filteredShops.map((shop) => {
+            return <PopularStore key={shop._id + "store"} shop={shop} />;
+          })}
         </Box>
       </Box>
     </Fragment>

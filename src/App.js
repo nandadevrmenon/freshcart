@@ -149,7 +149,7 @@ function App() {
           <Route path={"/orders/:id"} element={<UserOrdersPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/cart/:id" element={<UserCart />} />
-          {/* <Route path="/shop" element={<HomeShopPage />} /> */}
+          <Route path="/shop" element={<HomeShopPage />} />
         </Routes>
         <Footer></Footer>
       </BrowserRouter>

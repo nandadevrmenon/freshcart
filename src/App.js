@@ -87,7 +87,11 @@ function App() {
               <React.Fragment>
                 <Route
                   path="/protected/:id/home"
-                  element={<ShopHome />}
+                  element={
+                    <DeleteCartModalProvider>
+                      <ShopHome />
+                    </DeleteCartModalProvider>
+                  }
                 ></Route>
                 <Route
                   path="/protected/:id/products"

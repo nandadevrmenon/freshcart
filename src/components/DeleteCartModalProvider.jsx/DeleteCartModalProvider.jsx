@@ -10,7 +10,6 @@ const ModalContext = createContext();
 export const useModalContext = () => useContext(ModalContext);
 
 export const DeleteCartModalProvider = ({ children }) => {
-  const cartShop = useSelector((state) => state.cartShop);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {

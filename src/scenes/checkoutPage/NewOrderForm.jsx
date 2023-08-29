@@ -13,16 +13,13 @@ const dateSchema = yup.object().shape({
 
 const tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
+
+const dayAfterTomorrow = new Date();
+dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2);
+
 const initialDateValue = {
   completionDate: tomorrow.toString(),
 };
-
-const sevenDays = [new Date(tomorrow)];
-for (let i = 1; i < 7; i++) {
-  const nextDay = new Date(sevenDays[i - 1]);
-  nextDay.setDate(nextDay.getDate() + 1);
-  sevenDays.push(nextDay);
-}
 
 const daysOfWeek = [
   "Sunday",
@@ -48,7 +45,7 @@ const months = [
   "December",
 ];
 
-const NewOrderForm = ({}) => {
+const NewOrderForm = ({ ndd }) => {
   const user = useSelector((state) => state.user);
   const localCart = useSelector((state) => state.cart);
   const token = useSelector((state) => state.token);
@@ -82,6 +79,13 @@ const NewOrderForm = ({}) => {
       console.log("Error fetching Delivery Options:", err);
     }
   };
+
+  const sevenDays = ndd ? [new Date(tomorrow)] : [new Date(dayAfterTomorrow)];
+  for (let i = 1; i < 7; i++) {
+    const nextDay = new Date(sevenDays[i - 1]);
+    nextDay.setDate(nextDay.getDate() + 1);
+    sevenDays.push(nextDay);
+  }
   return (
     <Formik
       initialValues={initialDateValue}

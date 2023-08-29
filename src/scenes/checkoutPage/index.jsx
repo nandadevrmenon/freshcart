@@ -21,10 +21,8 @@ const CheckoutPage = () => {
   const user = useSelector((state) => state.user);
   const localCart = useSelector((state) => state.cart);
   const [cartItems, setCartItems] = useState([]);
-  const [offersDelivery, setOffersDelivery] = useState(false);
+  const [offersNDD, setOffersNDD] = useState(false);
   const cartShopId = useSelector((state) => state.cartShop);
-  const token = useSelector((state) => state.token);
-  const dispatch = useDispatch();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -61,7 +59,7 @@ const CheckoutPage = () => {
           );
           const options = await response.json();
           if (!options.delivery) navigate(`/cart/${user._id}`);
-          setOffersDelivery(options.delivery);
+          if (options.ndd) setOffersNDD(options.ndd);
         } catch (err) {
           console.log("Error fetching Delivery Options:", err);
         }
@@ -171,7 +169,7 @@ const CheckoutPage = () => {
         </Formik>
         <CheckoutTotalView cartTotal={cartTotal}></CheckoutTotalView>
 
-        <NewOrderForm></NewOrderForm>
+        <NewOrderForm ndd={offersNDD}></NewOrderForm>
         <Modal open={open} onClose={handleClose}>
           <Box
             sx={{

@@ -16,10 +16,7 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 
 const dayAfterTomorrow = new Date();
 dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2);
-
-const initialDateValue = {
-  completionDate: tomorrow.toString(),
-};
+console.log(dayAfterTomorrow.toString());
 
 const daysOfWeek = [
   "Sunday",
@@ -79,13 +76,15 @@ const NewOrderForm = ({ ndd }) => {
       console.log("Error fetching Delivery Options:", err);
     }
   };
-
   const sevenDays = ndd ? [new Date(tomorrow)] : [new Date(dayAfterTomorrow)];
   for (let i = 1; i < 7; i++) {
     const nextDay = new Date(sevenDays[i - 1]);
     nextDay.setDate(nextDay.getDate() + 1);
     sevenDays.push(nextDay);
   }
+  const initialDateValue = {
+    completionDate: ndd ? tomorrow.toString() : dayAfterTomorrow.toString(),
+  };
   return (
     <Formik
       initialValues={initialDateValue}

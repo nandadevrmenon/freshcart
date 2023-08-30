@@ -20,10 +20,9 @@ import ShopProfilePage from "scenes/shopProfilePage";
 import OrderConfirmation from "scenes/orderConfirmation";
 import CNCCheckoutPage from "scenes/cncCheckoutPage";
 import UserOrdersPage from "scenes/userOrdersPage";
-import HomeShopPage from "scenes/homeShopPage";
 import ManageShopOrdersPage from "scenes/manageShopOrdersPage";
 import DeleteCartModalProvider from "components/DeleteCartModalProvider.jsx/DeleteCartModalProvider";
-import { Delete } from "@mui/icons-material";
+import GeneralShopPage from "scenes/generalShopPage";
 
 function App() {
   const isShop = useSelector((state) => {
@@ -149,7 +148,7 @@ function App() {
           <Route path={"/orders/:id"} element={<UserOrdersPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/cart/:id" element={<UserCart />} />
-          <Route path="/shop" element={<HomeShopPage />} />
+          <Route path="/shop" element={<GeneralShopPage />} />
         </Routes>
         <Footer></Footer>
       </BrowserRouter>

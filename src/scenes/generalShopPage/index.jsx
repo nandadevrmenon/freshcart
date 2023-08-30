@@ -3,10 +3,9 @@ import { useSelector } from "react-redux";
 import { Box, Typography, TextField, Button } from "@mui/material";
 import theme from "theme";
 import PopularStore from "scenes/homePage/PopularStore";
-import PopularStoresNearYou from "scenes/homePage/PopularStoresNearYou";
 import PrimaryButton from "components/buttons/PrimaryButton";
 
-const HomeShopPage = () => {
+const GeneralShopPage = () => {
   const [shops, setShops] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const userArea = useSelector((state) =>
@@ -17,19 +16,18 @@ const HomeShopPage = () => {
     const fetchStores = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/shops/popularshops",
+          "http://localhost:3001/shops/fetchallshops",
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: userArea ? JSON.stringify({ area: userArea }) : "",
           }
         );
-        const items = await response.json();
-        setShops(items);
+        const shops = await response.json();
+        setShops(shops);
       } catch (error) {
-        console.error("Error fetching Popular Stores:", error);
+        console.error("Error fetching All Stores:", error);
       }
     };
 
@@ -89,4 +87,4 @@ const HomeShopPage = () => {
   );
 };
 
-export default HomeShopPage;
+export default GeneralShopPage;
